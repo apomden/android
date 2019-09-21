@@ -18,10 +18,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#fff"
             android:padding="5dp"
             android:id="@+id/imageDisplay"
-            android:src="@drawable/demoFacility"
+            android:src="@drawable/bar"
             />
 
 
