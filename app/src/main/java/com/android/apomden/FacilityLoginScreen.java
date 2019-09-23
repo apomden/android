@@ -13,7 +13,7 @@ import com.android.apomden.Models.User;
 import com.android.apomden.Services.Responser;
 import com.android.apomden.Utilities.Globall;
 
-public class LoginActivity extends AppCompatActivity {
+public class FacilityLoginScreen extends AppCompatActivity {
     Button enterMainScreen;
     EditText emailText, passwordText, facilityText, domainText;
 
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 //                }
 
 
-                startActivity(new Intent(view.getContext(), MainScreen.class));
+                startActivity(new Intent(view.getContext(), FacilityDashboardScreen.class));
 
             }
         });

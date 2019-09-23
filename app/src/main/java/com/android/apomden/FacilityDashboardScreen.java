@@ -33,7 +33,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainScreen extends AppCompatActivity
+public class FacilityDashboardScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -89,7 +89,7 @@ public class MainScreen extends AppCompatActivity
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("image/*");
-                MainScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), FCR);
+                FacilityDashboardScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), FCR);
             }
 
             // For Android 3.0+, above method not supported in some android 3+ versions, in such case we use this
@@ -99,7 +99,7 @@ public class MainScreen extends AppCompatActivity
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("image/*");
-                MainScreen.this.startActivityForResult(
+                FacilityDashboardScreen.this.startActivityForResult(
                         Intent.createChooser(i, "File Browser"),
                         FCR);
             }
@@ -111,7 +111,7 @@ public class MainScreen extends AppCompatActivity
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("image/*");
-                MainScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), MainScreen.FCR);
+                FacilityDashboardScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), FacilityDashboardScreen.FCR);
             }
 
             //For Android 5.0+
@@ -192,7 +192,7 @@ public class MainScreen extends AppCompatActivity
             view.loadUrl("about:blank");
             errorText.setVisibility(View.VISIBLE);
             errorLink.setVisibility(View.VISIBLE);
-            Toast.makeText(MainScreen.this, "NETWORK ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FacilityDashboardScreen.this, "NETWORK ERROR", Toast.LENGTH_SHORT).show();
             super.onReceivedError(view, errorCode, description, failingUrl);
 
         }
@@ -272,7 +272,7 @@ public class MainScreen extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= 21) {
             Uri[] results = null;
             //Check if response is positive
-            if (resultCode == MainScreen.RESULT_OK) {
+            if (resultCode == FacilityDashboardScreen.RESULT_OK) {
                 if (requestCode == FCR) {
                     if (null == mUMA) {
                         return;
