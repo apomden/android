@@ -42,7 +42,7 @@ public class MainScreen extends AppCompatActivity
     private ValueCallback<Uri> mUM;
     private ValueCallback<Uri[]> mUMA;
 
-    final String homeUlr = "https://shabogh.com/";
+    final String homeUlr = "https://www.apomden.com";
 
     ProgressBar progressBar;
     WebView webView;
