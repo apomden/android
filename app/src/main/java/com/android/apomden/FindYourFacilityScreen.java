@@ -32,13 +32,10 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
         btnFind = findViewById(R.id.btnFindFacility);
 
+        //TODO:: Remove Logic from here and put in an onclick event
         Globall.findFacility("samuel.opokuagyemang@gmail.com", new SearchResponsor() {
             @Override
             public void onSuccess(User user) {
-                Log.e("====Domain======", user.getDomain());
-                Log.e("====Email======", user.getEmail());
-                Log.e("====FacilityId======", user.getFacility());
-
                 // save in shared prefs
                 editor.putString("domain", user.getDomain());
                 editor.putString("email", user.getEmail());
@@ -55,6 +52,12 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //TODO::set a clean if to check if email field ain't empty
+                //TODO:: run the search and return the results
+                //TODO:: perform action according to results received
+
+
                 startActivity(new Intent(view.getContext(), FacilityLoginScreen.class));
 
             }

@@ -11,6 +11,7 @@ public class FacilityResultScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_result_screen);
 
+        //TODO:: Delete this screen its very useless
 
     }
 }

@@ -41,6 +41,7 @@ public class FacilityLoginScreen extends AppCompatActivity {
                     domain
             );
 
+            //TODO:: remove logic from here and put in an onclick
             Globall.logUserIn(user, "user/login/", new Responser() {
                 @Override
                 public void onSuccess(String string) {
@@ -62,12 +63,13 @@ public class FacilityLoginScreen extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-//                if ( isNotEmpty(emailText) && isNotEmpty(passwordText) ){
-//                    Log.e("==== Is Not Empty===", emailText.getText().toString().trim());
-//                } else {
-//                    Log.e("==== Is Empty===", emailText.getText().toString().trim());
-//                }
+                    //TODO:: Check for non emptiness of text box
+                    //TODO:: Run logic of login
+                    //TODO:: perform Action after results return
 
+//                if ( isNotEmpty(passwordText) ){
+//                    Log.e("==== Is Not Empty===", emailText.getText().toString().trim());
+//                }
 
                     startActivity(new Intent(view.getContext(), FacilityDashboardScreen.class));
 
