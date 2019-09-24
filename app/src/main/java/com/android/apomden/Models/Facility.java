@@ -117,6 +117,6 @@ public class Facility {
     }
 
     public String getFacilityAddress () {
-        return this.facilityCity + this.facilityCountry + " , " + this.facilityDistrict + " , " + this.facilityDistrict;
+        return this.facilityCity + ", " + this.facilityCountry + "  " + this.facilityDistrict + "  " + this.facilityStreet;
     }
 }

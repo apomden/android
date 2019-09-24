@@ -28,12 +28,16 @@ public class FacilityResultScreen extends AppCompatActivity {
         FacilityAdapter facilityAdapter = new FacilityAdapter(this, 0, Globall.globallFacilities);
         listView.setAdapter(facilityAdapter);
 
+        /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.e("====proc======", String.valueOf(i));
+
 
             }
         });
+        */
 
 
 

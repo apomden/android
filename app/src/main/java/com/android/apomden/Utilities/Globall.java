@@ -102,6 +102,8 @@ public class Globall {
                     String staffAt = dataObj.getString("staffAt");
                     JSONArray staffArray =  new JSONArray(staffAt);
 
+                    Log.e("Facilities=======", rep);
+
                     if (staffArray.length() > 0){
                         //List of facilities
 
@@ -150,7 +152,7 @@ public class Globall {
                         }
 
 
-                        Log.e("Facilities=======", String.valueOf(facilities.size()));
+
 
                         responser.onSuccess(facilities);
 
