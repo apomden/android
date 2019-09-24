@@ -63,6 +63,7 @@ public class MainScreen extends AppCompatActivity
 
         fab = findViewById(R.id.fab);
         webView = findViewById(R.id.webView);
+        progressBar = findViewById(R.id.progressBar);
 
 
         WebSettings webSettings = webView.getSettings();
