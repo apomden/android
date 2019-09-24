@@ -42,7 +42,7 @@ public class MainScreen extends AppCompatActivity
     private ValueCallback<Uri> mUM;
     private ValueCallback<Uri[]> mUMA;
 
-    final String homeUlr = "https://apomden.com";
+    final String homeUlr = "https://www.apomden.com";
 
 
 
@@ -71,6 +71,7 @@ public class MainScreen extends AppCompatActivity
         WebSettings webSettings = webView.getSettings();
         webSettings.setAllowFileAccess(true);
         webSettings.setJavaScriptEnabled(true);
+
         if (Build.VERSION.SDK_INT >= 21) {
             webSettings.setMixedContentMode(0);
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -144,7 +145,7 @@ public class MainScreen extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadUrl(homeUlr + "/dashboard/", "Home Lading");
+                loadUrl(homeUlr, "Home Lading");
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
