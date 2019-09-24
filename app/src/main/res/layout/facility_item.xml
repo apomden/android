@@ -30,6 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/itemFacName"
                 android:padding="1dp"
                 android:layout_centerVertical="true"
                 android:textSize="30dp"
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
+            android:id="@+id/itFasAddress"
             android:text="Tema Newtown, Accra Bubiashie"/>
 
     </LinearLayout>
