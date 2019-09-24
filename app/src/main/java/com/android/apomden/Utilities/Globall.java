@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.android.apomden.Models.User;
 import com.android.apomden.Services.APISERVICE;
+import com.android.apomden.Services.FINDERSERVICE;
 import com.android.apomden.Services.Responser;
 
 import org.json.JSONArray;
@@ -66,6 +67,50 @@ public class Globall {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 responser.onFailed("Login Failed");
+            }
+        });
+    }
+
+    public static void findFacility (String email, final Responser responser) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.apomden.com/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        FINDERSERVICE service = retrofit.create(FINDERSERVICE.class);
+        Call<ResponseBody> result = service.getCalls("user/search-by-email/" + email);
+
+        result.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    String rep = String.valueOf( response.body().source().readUtf8() );
+                    Log.e("=====HolaTrueeee=====", rep );
+                    JSONObject jsonObject = new JSONObject(rep);
+                    String status = jsonObject.getString("success");
+                    String error = jsonObject.getString("error");
+
+                    if (status.equals("true")){
+                        Log.e("=====HolaTrueeee=====", rep );
+                        responser.onSuccess("Login Successful");
+
+                    } else {
+                        Log.e("=====HolaFalse=====", rep );
+                        responser.onFailed(error);
+
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }
