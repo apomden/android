@@ -16,6 +16,8 @@ import com.android.apomden.Models.Facility;
 import com.android.apomden.Services.SearchResponsor;
 import com.android.apomden.Utilities.Globall;
 
+import java.util.List;
+
 public class FindYourFacilityScreen extends AppCompatActivity {
     Button btnFind;
     ProgressDialog pdialog;
@@ -31,7 +33,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
         if(pref.contains("domain")){
             // go to Login Screen
-            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
+//            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
         }
 
         btnFind = findViewById(R.id.btnFindFacility);
@@ -50,13 +52,17 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                     pdialog.show();
 
                     Globall.findFacility(email.getText().toString().trim(), new SearchResponsor() {
+
                         @Override
-                        public void onSuccess(Facility facility) {
+                        public void onSuccess(List<Facility> facilityList) {
                             // save in shared prefs
-                            editor.putString("domain", facility.getDomain());
-                            editor.putString("email", facility.getEmail());
-                            editor.putString("facilityId", facility.getFacility());
-                            editor.apply();
+//                            editor.putString("domain", facility.getDomain());
+//                            editor.putString("email", facility.getEmail());
+//                            editor.apply();
+
+                            Globall.globallFacilities = facilityList;
+
+                            Log.e("=====opo====", String.valueOf(facilityList.size()));
 
                             pdialog.dismiss();
 
@@ -66,7 +72,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
 
 
-                            startActivity(new Intent(getApplicationContext(), FacilityLoginScreen.class));
+                            startActivity(new Intent(getApplicationContext(), FacilityResultScreen.class));
 
                         }
 

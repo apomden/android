@@ -12,7 +12,7 @@ public class UserBuilder {
         map.put("email", facility.getEmail());
         map.put("password", facility.getPassword());
         map.put("domain", facility.getDomain());
-        map.put("facility", facility.getFacility());
+        map.put("facility", facility.getFacilityId());
         return map;
     }
 }

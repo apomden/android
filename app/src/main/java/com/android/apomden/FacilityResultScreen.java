@@ -3,6 +3,9 @@ package com.android.apomden;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.android.apomden.Utilities.Globall;
 
 public class FacilityResultScreen extends AppCompatActivity {
 
@@ -11,7 +14,7 @@ public class FacilityResultScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility_result_screen);
 
-        //TODO:: Delete this screen its very useless
+        Log.e("========sides====", String.valueOf(Globall.globallFacilities.size()));
 
     }
 }

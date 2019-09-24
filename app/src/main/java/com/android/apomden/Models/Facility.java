@@ -1,18 +1,30 @@
 package com.android.apomden.Models;
 
 public class Facility {
-     String email, facility, password, domain;
 
-    public Facility(String email, String facility, String password, String domain) {
+    private  String  email,
+             facilityId,
+             password,
+             domain,
+             facilityName,
+             facilityCountry=null,
+             facilityCity=null,
+             facilityRegion=null,
+             facilityStreet=null,
+             facilityDistrict=null;
+
+    private  Boolean verified;
+
+    public Facility(String email, String facilityId, String password, String domain) {
         this.email = email;
-        this.facility = facility;
+        this.facilityId = facilityId;
         this.password = password;
         this.domain = domain;
     }
 
-    public Facility(String email, String facility, String domain) {
+    public Facility(String email, String facilityId, String domain) {
         this.email = email;
-        this.facility = facility;
+        this.facilityId = facilityId;
         this.domain = domain;
     }
 
@@ -24,12 +36,12 @@ public class Facility {
         this.email = email;
     }
 
-    public String getFacility() {
-        return facility;
+    public String getFacilityId() {
+        return facilityId;
     }
 
-    public void setFacility(String facility) {
-        this.facility = facility;
+    public void setFacilityId(String facilityId) {
+        this.facilityId = facilityId;
     }
 
     public String getPassword() {
@@ -46,5 +58,65 @@ public class Facility {
 
     public void setDomain(String domain) {
         this.domain = domain;
+    }
+
+    public String getFacilityName() {
+        return facilityName;
+    }
+
+    public void setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
+    }
+
+    public String getFacilityCountry() {
+        return facilityCountry;
+    }
+
+    public void setFacilityCountry(String facilityCountry) {
+        this.facilityCountry = facilityCountry;
+    }
+
+    public String getFacilityCity() {
+        return facilityCity;
+    }
+
+    public void setFacilityCity(String facilityCity) {
+        this.facilityCity = facilityCity;
+    }
+
+    public String getFacilityRegion() {
+        return facilityRegion;
+    }
+
+    public void setFacilityRegion(String facilityRegion) {
+        this.facilityRegion = facilityRegion;
+    }
+
+    public String getFacilityStreet() {
+        return facilityStreet;
+    }
+
+    public void setFacilityStreet(String facilityStreet) {
+        this.facilityStreet = facilityStreet;
+    }
+
+    public String getFacilityDistrict() {
+        return facilityDistrict;
+    }
+
+    public void setFacilityDistrict(String facilityDistrict) {
+        this.facilityDistrict = facilityDistrict;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getFacilityAddress () {
+        return this.facilityCity + this.facilityCountry + " , " + this.facilityDistrict + " , " + this.facilityDistrict;
     }
 }

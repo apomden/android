@@ -13,6 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -23,6 +25,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Globall {
+
+    public static List<Facility> globallFacilities = null;
+    public static Facility selectedFacility = null;
+
 
     public static void logUserIn(Facility facility, String url, final Responser responser) {
         Map<String, Object> postUser = UserBuilder.buildUserJson(facility);
@@ -97,34 +103,56 @@ public class Globall {
                     JSONArray staffArray =  new JSONArray(staffAt);
 
                     if (staffArray.length() > 0){
-                        JSONObject fullDetails = staffArray.getJSONObject(0);
-                        String facility = fullDetails.getString("facility");
-                        JSONObject facilityObject = new JSONObject(facility);
-                        Log.e("gsss", facility);
+                        //List of facilities
 
-                        // get needables
-                        String facilityId                = facilityObject.getString("_id");
-                        String domain                    = facilityObject.getString("domain");
-                        String facilityName              = facilityObject.getString("name");
-                        String verified                  = facilityObject.getString("isVerified");
-                        JSONObject facilityAddressObject = new JSONObject(facilityObject.getString("address"));
+                        List<Facility> facilities = new ArrayList<>();
+
+                        // enter loop
+
+                        for (int i = 0; i < staffArray.length(); i++) {
+                            // single creation of a Facility
+
+                            JSONObject fullDetails = staffArray.getJSONObject(i);
+                            String facility = fullDetails.getString("facility");
+                            JSONObject facilityObject = new JSONObject(facility);
+
+                            // get needables
+                            String facilityId                = facilityObject.getString("_id");
+                            String domain                    = facilityObject.getString("domain");
+                            String facilityName              = facilityObject.getString("name");
+                            String verified                  = facilityObject.getString("isVerified");
+                            JSONObject facilityAddressObject = new JSONObject(facilityObject.getString("address"));
 
 
-                        String facilityCountry  = facilityAddressObject.getString("country");
-                        String facilityCity     = facilityAddressObject.getString("city");
-                        String facilityDistrict = facilityAddressObject.getString("district");
-                        String facilityStreet   = facilityAddressObject.getString("street");
-                        String facilityRegion   = facilityAddressObject.getString("region");
+                            String facilityCountry  = facilityAddressObject.getString("country");
+                            String facilityCity     = facilityAddressObject.getString("city");
+                            String facilityDistrict = facilityAddressObject.getString("district");
+                            String facilityStreet   = facilityAddressObject.getString("street");
+                            String facilityRegion   = facilityAddressObject.getString("region");
 
 
-                        // create new user with the 3 param constructor
-                        Facility user =  new Facility(
-                                email,
-                                facilityId,
-                                domain
-                        );
+                            // create new user with the 3 param constructor
+                            Facility user =  new Facility(
+                                    email,
+                                    facilityId,
+                                    domain
+                            );
 
-                        responser.onSuccess(user);
+                            user.setFacilityCity(facilityCity);
+                            user.setFacilityDistrict(facilityDistrict);
+                            user.setFacilityRegion(facilityRegion);
+                            user.setFacilityStreet(facilityStreet);
+                            user.setFacilityCountry(facilityCountry);
+                            user.setVerified(Boolean.getBoolean(verified));
+                            user.setFacilityName(facilityName);
+
+                            facilities.add(user);
+                        }
+
+
+                        Log.e("Facilities=======", String.valueOf(facilities.size()));
+
+                        responser.onSuccess(facilities);
 
                     } else {
                         responser.onFailed("This Email Is Not Registered Under Any Facility Please Check And Try Again");
