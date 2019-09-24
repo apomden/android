@@ -61,9 +61,6 @@ public class MainScreen extends AppCompatActivity
 
         Log.e("=======home====", homeUlr);
 
-        errorText  = findViewById(R.id.errorMessage);
-        errorLink  = findViewById(R.id.errorLink);
-        progressBar = findViewById(R.id.progressBar);
         fab = findViewById(R.id.fab);
         webView = findViewById(R.id.webView);
 
@@ -114,7 +111,7 @@ public class MainScreen extends AppCompatActivity
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("image/*");
-                MainScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), FacilityDashboardScreen.FCR);
+                MainScreen.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), MainScreen.FCR);
             }
 
             //For Android 5.0+

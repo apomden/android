@@ -6,28 +6,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_summary"
-            android:icon="@drawable/analysis"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Summary" />
         <item
             android:id="@+id/nav_beds"
-            android:icon="@drawable/patient"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Beds" />
         <item
             android:id="@+id/nav_transfer"
-            android:icon="@drawable/transfer"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Transfer" />
         <item
             android:id="@+id/nav_transfers"
-            android:icon="@drawable/transs"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Transfers" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/userb"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Profile" />
 
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Logout" />
     </group>
 
