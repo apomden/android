@@ -31,7 +31,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
         if(pref.contains("domain")){
             // go to Login Screen
-//            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
+            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
         }
 
         btnFind = findViewById(R.id.btnFindFacility);
@@ -41,16 +41,6 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //TODO::set a clean if to check if email field ain't empty
-                //TODO:: run the search and return the results
-                //TODO:: perform action according to results received
-
-                //TODO:: Remove Logic from here and put in an onclick event
-                // {  }
-
-
-
 
                 if (email.getText().toString().trim().length() > 0){
 
