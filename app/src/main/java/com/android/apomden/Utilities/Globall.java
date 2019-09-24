@@ -2,7 +2,7 @@ package com.android.apomden.Utilities;
 
 import android.util.Log;
 
-import com.android.apomden.Models.User;
+import com.android.apomden.Models.Facility;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
 import com.android.apomden.Services.Responser;
@@ -24,8 +24,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Globall {
 
-    public static void logUserIn(User user, String url, final Responser responser) {
-        Map<String, Object> postUser = UserBuilder.buildUserJson(user);
+    public static void logUserIn(Facility facility, String url, final Responser responser) {
+        Map<String, Object> postUser = UserBuilder.buildUserJson(facility);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.apomden.com/v2/")
@@ -42,13 +42,14 @@ public class Globall {
                 try {
 
                     String rep = String.valueOf(response.body().source().readUtf8());
-
+                    Log.e("=====results====", rep);
 
                     JSONObject jsonObject = new JSONObject(rep);
                     String status = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
 
-                    Log.e("++++sukura++++++", rep);
+
+
 
                     if (status.equals("true")){
                         responser.onSuccess("Login Successful");
@@ -90,8 +91,6 @@ public class Globall {
 
                     String rep = String.valueOf( response.body().source().readUtf8() );
                     JSONObject jsonObject = new JSONObject(rep);
-                    String status = jsonObject.getString("success");
-                    String error = jsonObject.getString("error");
                     String data = jsonObject.getString("data");
                     JSONObject dataObj  =  new JSONObject(data);
                     String staffAt = dataObj.getString("staffAt");
@@ -101,14 +100,25 @@ public class Globall {
                         JSONObject fullDetails = staffArray.getJSONObject(0);
                         String facility = fullDetails.getString("facility");
                         JSONObject facilityObject = new JSONObject(facility);
+                        Log.e("gsss", facility);
 
                         // get needables
-                        String facilityId = facilityObject.getString("_id");
-                        String domain = facilityObject.getString("domain");
+                        String facilityId                = facilityObject.getString("_id");
+                        String domain                    = facilityObject.getString("domain");
+                        String facilityName              = facilityObject.getString("name");
+                        String verified                  = facilityObject.getString("isVerified");
+                        JSONObject facilityAddressObject = new JSONObject(facilityObject.getString("address"));
+
+
+                        String facilityCountry  = facilityAddressObject.getString("country");
+                        String facilityCity     = facilityAddressObject.getString("city");
+                        String facilityDistrict = facilityAddressObject.getString("district");
+                        String facilityStreet   = facilityAddressObject.getString("street");
+                        String facilityRegion   = facilityAddressObject.getString("region");
 
 
                         // create new user with the 3 param constructor
-                        User user =  new User(
+                        Facility user =  new Facility(
                                 email,
                                 facilityId,
                                 domain

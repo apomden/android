@@ -9,14 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.android.apomden.Models.User;
+import com.android.apomden.Models.Facility;
 import com.android.apomden.Services.Responser;
 import com.android.apomden.Utilities.Globall;
 
 public class FacilityLoginScreen extends AppCompatActivity {
     Button enterMainScreen;
-    EditText emailText, passwordText, facilityText, domainText;
+    EditText passwordText;
+    TextView textTop, textBeforeBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,9 @@ public class FacilityLoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharedPreferences.Editor editor = pref.edit();
+
+
 
         // check shared preferences
         if(pref.contains("domain")){
@@ -34,15 +39,17 @@ public class FacilityLoginScreen extends AppCompatActivity {
 
             Log.e("======Details======", email + domain + facilityId );
 
-            User user = new User(
+            Facility facility = new Facility(
                     email,
                     facilityId,
-                    "1234",
+                    "123",
                     domain
             );
 
+
+
             //TODO:: remove logic from here and put in an onclick
-            Globall.logUserIn(user, "user/login/", new Responser() {
+            Globall.logUserIn(facility, "user/login/", new Responser() {
                 @Override
                 public void onSuccess(String string) {
                     Log.e("===Passed===", string);
@@ -54,9 +61,15 @@ public class FacilityLoginScreen extends AppCompatActivity {
                 }
             });
 
-            enterMainScreen = (Button) findViewById(R.id.btnEnterMainPage);
-            emailText = (EditText) findViewById(R.id.email);
-            passwordText = (EditText) findViewById(R.id.password);
+            enterMainScreen = findViewById(R.id.btnLoginToFacility);
+            passwordText    = findViewById(R.id.facilityPassword);
+            textTop         = findViewById(R.id.textTop);
+            textBeforeBox   = findViewById(R.id.textBeforeBox);
+
+            textTop.setText("Welcome To Koobi");
+
+//            editor.clear();
+//            editor.commit();
 
 
             enterMainScreen.setOnClickListener(new View.OnClickListener() {

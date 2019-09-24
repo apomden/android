@@ -1,16 +1,16 @@
 package com.android.apomden.Models;
 
-public class User {
+public class Facility {
      String email, facility, password, domain;
 
-    public User(String email, String facility, String password, String domain) {
+    public Facility(String email, String facility, String password, String domain) {
         this.email = email;
         this.facility = facility;
         this.password = password;
         this.domain = domain;
     }
 
-    public User(String email, String facility, String domain) {
+    public Facility(String email, String facility, String domain) {
         this.email = email;
         this.facility = facility;
         this.domain = domain;
