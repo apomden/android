@@ -3,6 +3,7 @@ package com.android.apomden;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,15 +23,44 @@ public class FacilityLoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
 
-        enterMainScreen = (Button) findViewById(R.id.btnEnterMainPage);
-        emailText = (EditText) findViewById(R.id.email);
-        passwordText = (EditText) findViewById(R.id.password);
+        // check shared preferences
+        if(pref.contains("domain")){
+
+            String email = pref.getString("email", null);
+            String domain = pref.getString("domain", null);
+            String facilityId = pref.getString("facilityId", null);
+
+            Log.e("======Details======", email + domain + facilityId );
+
+            User user = new User(
+                    email,
+                    facilityId,
+                    "1234",
+                    domain
+            );
+
+            Globall.logUserIn(user, "user/login/", new Responser() {
+                @Override
+                public void onSuccess(String string) {
+                    Log.e("===Passed===", string);
+                }
+
+                @Override
+                public void onFailed(String string) {
+                    Log.e("===Failed===", string);
+                }
+            });
+
+            enterMainScreen = (Button) findViewById(R.id.btnEnterMainPage);
+            emailText = (EditText) findViewById(R.id.email);
+            passwordText = (EditText) findViewById(R.id.password);
 
 
-        enterMainScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            enterMainScreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 //                if ( isNotEmpty(emailText) && isNotEmpty(passwordText) ){
 //                    Log.e("==== Is Not Empty===", emailText.getText().toString().trim());
@@ -39,30 +69,21 @@ public class FacilityLoginScreen extends AppCompatActivity {
 //                }
 
 
-                startActivity(new Intent(view.getContext(), FacilityDashboardScreen.class));
+                    startActivity(new Intent(view.getContext(), FacilityDashboardScreen.class));
 
-            }
-        });
+                }
+            });
 
 
-        User user = new User(
-                "samuel.opokuagyemang@gmail.com",
-                "5d59b6e4dfdae6caf961966e",
-                "123",
-                "Osei"
-        );
 
-        Globall.logUserIn(user, "user/login/", new Responser() {
-            @Override
-            public void onSuccess(String string) {
-                Log.e("===Passed===", string);
-            }
 
-            @Override
-            public void onFailed(String string) {
-                Log.e("===Failed===", string);
-            }
-        });
+        } else {
+
+            startActivity(new Intent(this.getApplicationContext(), FindYourFacilityScreen.class));
+        }
+
+
+
 
 
     }

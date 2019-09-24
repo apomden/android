@@ -25,6 +25,11 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         final SharedPreferences.Editor editor = pref.edit();
 
+        if(pref.contains("domain")){
+            // go to Login Screen
+            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
+        }
+
         btnFind = findViewById(R.id.btnFindFacility);
 
         Globall.findFacility("samuel.opokuagyemang@gmail.com", new SearchResponsor() {
@@ -50,7 +55,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), FacilityResultScreen.class));
+                startActivity(new Intent(view.getContext(), FacilityLoginScreen.class));
 
             }
         });

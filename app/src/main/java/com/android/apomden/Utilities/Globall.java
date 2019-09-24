@@ -48,6 +48,8 @@ public class Globall {
                     String status = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
 
+                    Log.e("++++sukura++++++", rep);
+
                     if (status.equals("true")){
                         responser.onSuccess("Login Successful");
 
