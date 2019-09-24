@@ -6,6 +6,7 @@ import com.android.apomden.Models.User;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
 import com.android.apomden.Services.Responser;
+import com.android.apomden.Services.SearchResponsor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,7 +72,7 @@ public class Globall {
         });
     }
 
-    public static void findFacility (String email, final Responser responser) {
+    public static void findFacility (final String email, final SearchResponsor responser) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.apomden.com/v2/")
@@ -86,14 +87,34 @@ public class Globall {
                 try {
 
                     String rep = String.valueOf( response.body().source().readUtf8() );
-                    Log.e("=====HolaTrueeee=====", rep );
                     JSONObject jsonObject = new JSONObject(rep);
                     String status = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
 
                     if (status.equals("true")){
-                        Log.e("=====HolaTrueeee=====", rep );
-                        responser.onSuccess("Login Successful");
+
+                        String data = jsonObject.getString("data");
+                        JSONObject dataObj  =  new JSONObject(data);
+                        String staffAt = dataObj.getString("staffAt");
+                        JSONArray staffArray =  new JSONArray(staffAt);
+                        JSONObject fullDetails = staffArray.getJSONObject(0);
+                        String facility = fullDetails.getString("facility");
+                        JSONObject facilityObject = new JSONObject(facility);
+
+
+                        // get needables
+                        String facilityId = facilityObject.getString("_id");
+                        String domain = facilityObject.getString("domain");
+
+
+                        // create new user with the 3 param constructor
+                        User user =  new User(
+                                email,
+                                facilityId,
+                                domain
+                        );
+
+                        responser.onSuccess(user);
 
                     } else {
                         Log.e("=====HolaFalse=====", rep );

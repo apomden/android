@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.apomden.Models.User;
 import com.android.apomden.Services.Responser;
+import com.android.apomden.Services.SearchResponsor;
 import com.android.apomden.Utilities.Globall;
 
 public class FindYourFacilityScreen extends AppCompatActivity {
@@ -20,15 +23,17 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
         btnFind = findViewById(R.id.btnFindFacility);
 
-        Globall.findFacility("samuel.opokuagyemang@gmail.com", new Responser() {
+        Globall.findFacility("samuel.opokuagyemang@gmail.com", new SearchResponsor() {
             @Override
-            public void onSuccess(String string) {
-
+            public void onSuccess(User user) {
+                Log.e("====Domain======", user.getDomain());
+                Log.e("====Email======", user.getEmail());
+                Log.e("====FacilityId======", user.getFacility());
             }
 
             @Override
             public void onFailed(String string) {
-
+                Log.e("====Error======", string);
             }
         });
 

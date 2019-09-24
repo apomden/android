@@ -10,6 +10,12 @@ public class User {
         this.domain = domain;
     }
 
+    public User(String email, String facility, String domain) {
+        this.email = email;
+        this.facility = facility;
+        this.domain = domain;
+    }
+
     public String getEmail() {
         return email;
     }
