@@ -90,17 +90,15 @@ public class Globall {
                     JSONObject jsonObject = new JSONObject(rep);
                     String status = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
+                    String data = jsonObject.getString("data");
+                    JSONObject dataObj  =  new JSONObject(data);
+                    String staffAt = dataObj.getString("staffAt");
+                    JSONArray staffArray =  new JSONArray(staffAt);
 
-                    if (status.equals("true")){
-
-                        String data = jsonObject.getString("data");
-                        JSONObject dataObj  =  new JSONObject(data);
-                        String staffAt = dataObj.getString("staffAt");
-                        JSONArray staffArray =  new JSONArray(staffAt);
+                    if (staffArray.length() > 0){
                         JSONObject fullDetails = staffArray.getJSONObject(0);
                         String facility = fullDetails.getString("facility");
                         JSONObject facilityObject = new JSONObject(facility);
-
 
                         // get needables
                         String facilityId = facilityObject.getString("_id");
@@ -117,8 +115,7 @@ public class Globall {
                         responser.onSuccess(user);
 
                     } else {
-                        Log.e("=====HolaFalse=====", rep );
-                        responser.onFailed(error);
+                        responser.onFailed("This Email Is Not Registered Under Any Facility Please Check And Try Again");
 
                     }
 
