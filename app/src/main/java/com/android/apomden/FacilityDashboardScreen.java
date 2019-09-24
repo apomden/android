@@ -6,9 +6,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.android.apomden.Utilities.Globall;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -42,7 +44,9 @@ public class FacilityDashboardScreen extends AppCompatActivity
     private ValueCallback<Uri> mUM;
     private ValueCallback<Uri[]> mUMA;
 
-    final String homeUlr = "https://www.apomden.com";
+    final String homeUlr = Globall.currentFacilityUrl;
+
+
 
     ProgressBar progressBar;
     WebView webView;
@@ -57,6 +61,7 @@ public class FacilityDashboardScreen extends AppCompatActivity
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        Log.e("=======home====", homeUlr);
 
         errorText  = findViewById(R.id.errorMessage);
         errorLink  = findViewById(R.id.errorLink);
@@ -141,8 +146,7 @@ public class FacilityDashboardScreen extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                loadUrl(homeUlr + "/dashboard/", "Home Lading");
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -181,8 +185,7 @@ public class FacilityDashboardScreen extends AppCompatActivity
         @Override
         public void onLoadResource(WebView view, String url) {
             super.onLoadResource(view, url);
-            view.loadUrl("javascript:document.getElementByClass('shadowblock_out').style.display='none';" +
-                    "void(0);");
+            view.loadUrl("void():");
         }
 
 

@@ -28,6 +28,7 @@ public class Globall {
 
     public static List<Facility> globallFacilities = null;
     public static Facility selectedFacility = null;
+    public static String currentFacilityUrl = null;
 
 
     public static void logUserIn(Facility facility, String url, final Responser responser) {
@@ -61,7 +62,7 @@ public class Globall {
                         responser.onSuccess("Login Successful");
 
                     } else {
-                        responser.onFailed(error);
+                        responser.onFailed("Login Failed: Wrong Password");
 
                     }
 
@@ -76,7 +77,7 @@ public class Globall {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                responser.onFailed("Login Failed");
+                responser.onFailed("Login Failed: Wrong Password");
             }
         });
     }
@@ -102,7 +103,7 @@ public class Globall {
                     String staffAt = dataObj.getString("staffAt");
                     JSONArray staffArray =  new JSONArray(staffAt);
 
-                    Log.e("Facilities=======", rep);
+//                    Log.e("Facilities=======", rep);
 
                     if (staffArray.length() > 0){
                         //List of facilities
