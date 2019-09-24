@@ -3,6 +3,7 @@ package com.android.apomden;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,9 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_your_facility_screen);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        final SharedPreferences.Editor editor = pref.edit();
+
         btnFind = findViewById(R.id.btnFindFacility);
 
         Globall.findFacility("samuel.opokuagyemang@gmail.com", new SearchResponsor() {
@@ -29,6 +33,12 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                 Log.e("====Domain======", user.getDomain());
                 Log.e("====Email======", user.getEmail());
                 Log.e("====FacilityId======", user.getFacility());
+
+                // save in shared prefs
+                editor.putString("domain", user.getDomain());
+                editor.putString("email", user.getEmail());
+                editor.putString("facilityId", user.getFacility());
+                editor.apply();
             }
 
             @Override
