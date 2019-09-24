@@ -145,7 +145,7 @@ public class MainScreen extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadUrl(homeUlr, "Home Lading");
+                loadUrl(homeUlr + "/facility/get-started", "Home Lading");
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -248,16 +248,28 @@ public class MainScreen extends AppCompatActivity
 
         if (id == R.id.nav_summary) {
             // Handle the camera action
+
+            // /facility/get-started
+
+            loadUrl(webView.getUrl() + "/dashboard", "Loading Dashboard");
+
         } else if (id == R.id.nav_beds) {
 
+            loadUrl(webView.getUrl() + "/beds", "Beds Loading...");
         } else if (id == R.id.nav_transfer) {
 
+            loadUrl(webView.getUrl() + "/transfers", "Loading Dashboard");
         } else if (id == R.id.nav_transfers) {
+
+            loadUrl(webView.getUrl() + "/search/services", "Loading Dashboard");
 
         } else if (id == R.id.nav_profile) {
 
+            loadUrl(webView.getUrl() + "/profile", "Loading Dashboard");
+
         } else if (id == R.id.nav_logout) {
 
+            loadUrl(webView.getUrl() + "/login", "Loading Dashboard");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
