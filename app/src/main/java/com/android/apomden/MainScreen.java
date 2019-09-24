@@ -80,7 +80,7 @@ public class MainScreen extends AppCompatActivity
         } else if (Build.VERSION.SDK_INT < 19) {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        webView.loadUrl(homeUlr);
+        webView.loadUrl(homeUlr + "/facility/get-started");
         webView.setWebViewClient(new DefaultWebViewClient());
 
 
@@ -251,24 +251,32 @@ public class MainScreen extends AppCompatActivity
 
             // /facility/get-started
 
+            Log.e("==========||", webView.getUrl());
+
             loadUrl(webView.getUrl() + "/dashboard", "Loading Dashboard");
 
         } else if (id == R.id.nav_beds) {
 
+            Log.e("==========||", webView.getUrl());
+
             loadUrl(webView.getUrl() + "/beds", "Beds Loading...");
         } else if (id == R.id.nav_transfer) {
 
+            Log.e("==========||", webView.getUrl());
             loadUrl(webView.getUrl() + "/transfers", "Loading Dashboard");
         } else if (id == R.id.nav_transfers) {
 
+            Log.e("==========||", webView.getUrl());
             loadUrl(webView.getUrl() + "/search/services", "Loading Dashboard");
 
         } else if (id == R.id.nav_profile) {
 
+            Log.e("==========||", webView.getUrl());
             loadUrl(webView.getUrl() + "/profile", "Loading Dashboard");
 
         } else if (id == R.id.nav_logout) {
 
+            Log.e("==========||", webView.getUrl());
             loadUrl(webView.getUrl() + "/login", "Loading Dashboard");
         }
 
