@@ -80,7 +80,7 @@ public class MainScreen extends AppCompatActivity
         } else if (Build.VERSION.SDK_INT < 19) {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        webView.loadUrl(homeUlr + "/facility/get-started");
+        webView.loadUrl(homeUlr + "/facility/get-started/find");
         webView.setWebViewClient(new DefaultWebViewClient());
 
 
@@ -253,31 +253,31 @@ public class MainScreen extends AppCompatActivity
 
             Log.e("==========||", webView.getUrl());
 
-            loadUrl(webView.getUrl() + "/dashboard", "Loading Dashboard");
-
+//            loadUrl(webView.getUrl() + "/dashboard", "Loading Dashboard");
+            startActivity(new Intent(getApplicationContext(), WebViewScreen.class));
         } else if (id == R.id.nav_beds) {
 
             Log.e("==========||", webView.getUrl());
 
-            loadUrl(webView.getUrl() + "/beds", "Beds Loading...");
+//            loadUrl(webView.getUrl() + "/beds", "Beds Loading...");
         } else if (id == R.id.nav_transfer) {
 
             Log.e("==========||", webView.getUrl());
-            loadUrl(webView.getUrl() + "/transfers", "Loading Dashboard");
+//            loadUrl(webView.getUrl() + "/transfers", "Loading Dashboard");
         } else if (id == R.id.nav_transfers) {
 
             Log.e("==========||", webView.getUrl());
-            loadUrl(webView.getUrl() + "/search/services", "Loading Dashboard");
+//            loadUrl(webView.getUrl() + "/search/services", "Loading Dashboard");
 
         } else if (id == R.id.nav_profile) {
 
             Log.e("==========||", webView.getUrl());
-            loadUrl(webView.getUrl() + "/profile", "Loading Dashboard");
+//            loadUrl(webView.getUrl() + "/profile", "Loading Dashboard");
 
         } else if (id == R.id.nav_logout) {
 
             Log.e("==========||", webView.getUrl());
-            loadUrl(webView.getUrl() + "/login", "Loading Dashboard");
+//            loadUrl(webView.getUrl() + "/login", "Loading Dashboard");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
