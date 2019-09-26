@@ -77,7 +77,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                                         "Success",
                                         Toast.LENGTH_SHORT).show();
 
-                                startActivity(new Intent(getApplicationContext(), FacilityDashboardScreen.class));
+                                startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 
                                 Log.e("======sonnie======", Globall.currentFacilityUrl);
 
