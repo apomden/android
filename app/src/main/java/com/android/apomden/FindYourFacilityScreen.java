@@ -3,6 +3,7 @@ package com.android.apomden;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,74 +23,40 @@ public class FindYourFacilityScreen extends AppCompatActivity {
     Button btnFind;
     ProgressDialog pdialog;
     EditText email;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_your_facility_screen);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        final SharedPreferences.Editor editor = pref.edit();
-
-        if(pref.contains("domain")){
-            // go to Login Screen
-//            startActivity(new Intent(this.getApplicationContext(), FacilityLoginScreen.class));
-        }
-
         btnFind = findViewById(R.id.btnFindFacility);
         email = findViewById(R.id.facilityEmail);
         pdialog=new ProgressDialog(this);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+
+        if(pref.contains("email")){
+
+            String emailUsedPreviously = pref.getString("email", "email");
+
+            searchWithEmail(emailUsedPreviously);
+
+        }
+
+
 
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (email.getText().toString().trim().length() > 0){
+                final String emailGotten = email.getText().toString().trim();
 
-                    //start dialog
-                    pdialog.setTitle("Loading.....");
-                    pdialog.setIndeterminate(true);
-                    pdialog.show();
+                if (emailGotten.length() > 0){
 
-                    Globall.findFacility(email.getText().toString().trim(), new SearchResponsor() {
-
-                        @Override
-                        public void onSuccess(List<Facility> facilityList) {
-                            // save in shared prefs
-//                            editor.putString("domain", facility.getDomain());
-//                            editor.putString("email", facility.getEmail());
-//                            editor.apply();
-
-                            Globall.globallFacilities = facilityList;
-
-                            Log.e("=====opo====", String.valueOf(facilityList.size()));
-
-                            pdialog.dismiss();
-
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Success",
-                                    Toast.LENGTH_LONG).show();
-
-
-                            startActivity(new Intent(getApplicationContext(), FacilityResultScreen.class));
-
-                        }
-
-                        @Override
-                        public void onFailed(String string) {
-
-                            pdialog.dismiss();
-
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    string,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-
-
+                    searchWithEmail(emailGotten);
 
                 } else {
 
@@ -104,4 +71,54 @@ public class FindYourFacilityScreen extends AppCompatActivity {
             }
         });
     }
+
+    public void searchWithEmail (final String emailGotten) {
+        //start dialog
+        pdialog.setTitle("Loading Facilities For " + emailGotten + ". Please Wait...");
+        pdialog.setIndeterminate(true);
+        pdialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                pdialog.dismiss();
+            }
+        });
+        pdialog.show();
+
+        Globall.findFacility(emailGotten, new SearchResponsor() {
+
+            @Override
+            public void onSuccess(List<Facility> facilityList) {
+                // save in shared prefs
+                editor.putString("email", emailGotten);
+                editor.commit();
+
+                Globall.globallFacilities = facilityList;
+
+                pdialog.dismiss();
+
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Success",
+                        Toast.LENGTH_LONG).show();
+
+
+                startActivity(new Intent(getApplicationContext(), FacilityResultScreen.class));
+
+            }
+
+            @Override
+            public void onFailed(String string) {
+
+                pdialog.dismiss();
+
+                Toast.makeText(
+                        getApplicationContext(),
+                        string,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+
 }
