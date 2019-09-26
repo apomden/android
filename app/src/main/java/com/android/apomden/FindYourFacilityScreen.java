@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Services.Responser;
 import com.android.apomden.Services.SearchResponsor;
 import com.android.apomden.Utilities.Globall;
 
@@ -42,7 +43,63 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
             String emailUsedPreviously = pref.getString("email", "email");
 
+            if(pref.contains("lollipop")){
+                String lollipop = pref.getString("lollipop", "lollipop");
+                String facName  = pref.getString("facName", "facName");
+                String facId    = pref.getString("facId", "facId");
+
+                Globall.selectedFacility =  new Facility(emailUsedPreviously, facId, lollipop, facName);
+
+                //start dialog
+                pdialog.setTitle("Logging You Into " + facName + " with email " + emailUsedPreviously + " Please Wait...");
+                pdialog.setIndeterminate(true);
+                pdialog.show();
+
+
+                Globall.logUserIn(Globall.selectedFacility, "user/login/", new Responser() {
+                            @Override
+                            public void onSuccess(String string) {
+
+                                Log.e("===Passed===", string);
+                                editor.putString("facName",  Globall.selectedFacility.getDomain());
+                                editor.putString("lollipop", Globall.selectedFacility.getPassword());
+                                editor.putString("facId",    Globall.selectedFacility.getFacilityId());
+                                editor.commit();
+
+                                pdialog.dismiss();
+
+                                Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
+
+
+
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Success",
+                                        Toast.LENGTH_SHORT).show();
+
+                                startActivity(new Intent(getApplicationContext(), FacilityDashboardScreen.class));
+
+                                Log.e("======sonnie======", Globall.currentFacilityUrl);
+
+
+
+                            }
+
+                            @Override
+                            public void onFailed(String string) {
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Error While Logging In..",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+            /*
+            // load the facilities belonging to the email previously entered
+
             searchWithEmail(emailUsedPreviously);
+            */
 
         }
 
@@ -99,7 +156,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                 Toast.makeText(
                         getApplicationContext(),
                         "Success",
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
 
 
                 startActivity(new Intent(getApplicationContext(), FacilityResultScreen.class));
@@ -114,7 +171,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                 Toast.makeText(
                         getApplicationContext(),
                         string,
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
