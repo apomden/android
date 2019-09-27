@@ -14,6 +14,11 @@ public class Department {
         this.roomArrayList = roomArrayList;
     }
 
+    public Department(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

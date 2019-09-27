@@ -54,7 +54,7 @@ public class SummaryFragment extends Fragment {
         );
         Dashboard dashboard1 =  new Dashboard(
                 "Outgoing Transfers",
-                "5",
+                String.valueOf(Globall.transferList.size()),
                 getResources().getDrawable(R.drawable.tranfip),
                 getResources().getDrawable(R.drawable.black_mix)
         );

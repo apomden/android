@@ -66,17 +66,21 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                                 editor.putString("facId",    Globall.selectedFacility.getFacilityId());
                                 editor.commit();
 
-                                pdialog.dismiss();
+
 
                                 Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
                                 Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId());
+
+                                Globall.getFacilityTransfers(Globall.selectedFacility.getDomain());
 
 
                                 Toast.makeText(
                                         getApplicationContext(),
                                         "Success",
                                         Toast.LENGTH_SHORT).show();
+
+                                pdialog.dismiss();
 
                                 startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 

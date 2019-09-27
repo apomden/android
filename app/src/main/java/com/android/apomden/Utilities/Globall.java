@@ -7,9 +7,11 @@ import com.android.apomden.Models.Contact;
 import com.android.apomden.Models.Dashboard;
 import com.android.apomden.Models.Department;
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Models.Hospital;
 import com.android.apomden.Models.Room;
 import com.android.apomden.Models.Service;
 import com.android.apomden.Models.Tag;
+import com.android.apomden.Models.Transfer;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
 import com.android.apomden.Services.INCLUDE;
@@ -51,6 +53,9 @@ public class Globall {
     public static List<Department> departmentList = new ArrayList<>();
     public static List<Bed> bedList = new ArrayList<>();
     public static Contact contact = null;
+
+
+    public static List<Transfer> transferList =  new ArrayList<>();
 
 
 
@@ -248,7 +253,7 @@ public class Globall {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String rep = String.valueOf( response.body().source().readUtf8() );
-                    formatJson(rep);
+                    formatFacilityDetailJson(rep);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -266,7 +271,7 @@ public class Globall {
 
     }
 
-    public static void formatJson ( String gottenString ) throws JSONException {
+    public static void formatFacilityDetailJson ( String gottenString ) throws JSONException {
         JSONObject jsonObject = new JSONObject(gottenString);
         JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
         JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
@@ -358,7 +363,7 @@ public class Globall {
             departmentList.add(department);
         }
 
-
+        /*
         Log.e("=====Department==", String.valueOf(departmentList.size()));
 
         Log.e("=====Tag==", String.valueOf(tagList.size()));
@@ -368,11 +373,141 @@ public class Globall {
         Log.e("=====Room Count==", String.valueOf(roomList.size()));
 
         Log.e("=====Bed Count==", String.valueOf(bedList.size()));
+        */
 
 
     }// end of formatJSON
 
 
 
+    public static void getFacilityTransfers (String domain){
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.apomden.com/v2/facility/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        INCLUDE service = retrofit.create(INCLUDE.class);
+        Call<ResponseBody> result = service.sendUser("d/" + domain + "/transfers");
+
+        result.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String rep = String.valueOf( response.body().source().readUtf8() );
+                    formatTransferJson(rep);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+
+    public static void formatTransferJson (String stringToFormat) throws JSONException {
+
+        JSONObject dataObject = new JSONObject(stringToFormat);
+        JSONArray dataArray = new JSONArray(dataObject.getString("data"));
+
+
+        for (int i = 0; i < dataArray.length() ; i++) {
+
+            Transfer transfer = new Transfer();
+
+            JSONObject transferObject =  new JSONObject(dataArray.getString(i));
+
+
+            transfer.set_id(transferObject.getString("_id"));
+            transfer.setAge(transferObject.getString("age"));
+            transfer.setIsEmergency(transferObject.getString("isEmergency"));
+            transfer.setIsConscious(transferObject.getString("isConscious"));
+            transfer.setDiagnosisAndTreatmentGiven(transferObject.getString("diagnosisAndTreatmentGiven"));
+            transfer.setImmediateReasonForReferral(transferObject.getString("immediateReasonForReferral"));
+            transfer.setReferringStaff(transferObject.getString("referringStaff"));
+            transfer.setAge(transferObject.getString("age"));
+            transfer.setName(transferObject.getString("name"));
+            transfer.setGender(transferObject.getString("gender"));
+
+
+
+            JSONObject originFacilityObject = new JSONObject(transferObject.getString("originFacility"));
+            JSONObject destinationFacilityObject = new JSONObject(transferObject.getString("destinationFacility"));
+            JSONObject originDepartmentObject = new JSONObject(transferObject.getString("originDepartment"));
+            JSONObject destinationDepartmentObject = new JSONObject(transferObject.getString("destinationDepartment"));
+
+            Hospital originHospital =  new Hospital(
+                    originFacilityObject.getString("_id"),
+                    originFacilityObject.getString("name"),
+                    originFacilityObject.getString("domain"),
+                    originFacilityObject.getString("type")
+            );
+
+            transfer.setOriginFacility(originHospital);
+
+            Hospital destinationHospital =  new Hospital(
+                    destinationFacilityObject.getString("_id"),
+                    destinationFacilityObject.getString("name"),
+                    destinationFacilityObject.getString("domain"),
+                    destinationFacilityObject.getString("type")
+            );
+
+            transfer.setDestinationFacility(destinationHospital);
+
+            Department originDepartment =  new Department(
+                    originDepartmentObject.getString("_id"),
+                    originDepartmentObject.getString("name")
+            );
+
+            transfer.setOriginDepartment(originDepartment);
+
+
+            Department destinationDepartment =  new Department(
+                    destinationDepartmentObject.getString("_id"),
+                    destinationDepartmentObject.getString("name")
+            );
+
+            transfer.setDestinationDepertment(destinationDepartment);
+
+
+            /*{
+                originFacility{ _id, name, domain, type },
+                destinationFacility{ _id, name, domain, type } ,
+                originDepartment, { _id, name }
+                destinationDepartment,{ _id, name }
+                age,
+                gender,
+                isEmergency,
+                isConscious,
+                diagnosisAndTreatmentGiven,
+                immediateReasonForReferral,
+                referringStaff,
+                referringStaffEmail,
+                _id,
+                name,
+                gender,
+              }
+             *  */
+
+            transferList.add(transfer);
+
+
+            Log.e("======dataObject=====", String.valueOf(transferObject));
+
+        }
+
+        Log.e("======Trans Obj=====", String.valueOf(transferList.size()));
+
+
+
+    }
 
 }
