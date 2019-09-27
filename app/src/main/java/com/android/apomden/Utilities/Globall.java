@@ -175,4 +175,32 @@ public class Globall {
             }
         });
     }
+
+
+    public static void getFacilityDetails (String facilityId){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.apomden.com/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        FINDERSERVICE service = retrofit.create(FINDERSERVICE.class);
+        Call<ResponseBody> result = service.getCalls("facility/" + facilityId);
+        result.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String rep = String.valueOf( response.body().source().readUtf8() );
+                    Log.e("===FacilityGet======", rep);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
 }
