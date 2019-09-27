@@ -48,19 +48,19 @@ public class SummaryFragment extends Fragment {
         Dashboard dashboard1 =  new Dashboard(
                 "Outgoing Transfers",
                 "5",
-                getResources().getDrawable(R.drawable.pat),
+                getResources().getDrawable(R.drawable.tranfip),
                 getResources().getDrawable(R.drawable.black_mix)
         );
         Dashboard dashboard2 =  new Dashboard(
                 "Incoming Transfers & Emergencies",
                 "3",
-                getResources().getDrawable(R.drawable.pat),
+                getResources().getDrawable(R.drawable.transabat),
                 getResources().getDrawable(R.drawable.red_mix)
         );
         Dashboard dashboard3 =  new Dashboard(
                 "Turn Over Rate",
                 "4 days",
-                getResources().getDrawable(R.drawable.pat),
+                getResources().getDrawable(R.drawable.anaomati),
                 getResources().getDrawable(R.drawable.orange_mix)
         );
 
