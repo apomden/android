@@ -2,9 +2,11 @@ package com.android.apomden.Utilities;
 
 import android.util.Log;
 
+import com.android.apomden.Models.Dashboard;
 import com.android.apomden.Models.Facility;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
+import com.android.apomden.Services.INCLUDE;
 import com.android.apomden.Services.Responser;
 import com.android.apomden.Services.SearchResponsor;
 
@@ -13,11 +15,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,13 +37,31 @@ public class Globall {
     public static List<Facility> globallFacilities = null;
     public static Facility selectedFacility = null;
     public static String currentFacilityUrl = null;
+    public static List<Dashboard> dashboards = null;
+
+
 
 
     public static void logUserIn(Facility facility, String url, final Responser responser) {
         Map<String, Object> postUser = UserBuilder.buildUserJson(facility);
 
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        // init cookie manager
+        CookieHandler cookieHandler = new CookieManager();
+
+        OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(interceptor)
+                .cookieJar(new JavaNetCookieJar(cookieHandler))
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.apomden.com/v2/")
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APISERVICE service = retrofit.create(APISERVICE.class);
@@ -178,12 +204,26 @@ public class Globall {
 
 
     public static void getFacilityDetails (String facilityId){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.apomden.com/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        // init cookie manager
+        CookieHandler cookieHandler = new CookieManager();
+
+        OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(interceptor)
+                .cookieJar(new JavaNetCookieJar(cookieHandler))
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .build();
-        FINDERSERVICE service = retrofit.create(FINDERSERVICE.class);
-        Call<ResponseBody> result = service.getCalls("facility/" + facilityId);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.apomden.com/v2/facility/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+        INCLUDE service = retrofit.create(INCLUDE.class);
+        Call<ResponseBody> result = service.sendUser(facilityId);
         result.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -203,4 +243,70 @@ public class Globall {
         });
 
     }
+
+    public static void formatJson () throws JSONException {
+        JSONObject jsonObject = new JSONObject(Mimicker.jsonFormat);
+        JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
+        JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
+        JSONArray patientArrayObject =  new JSONArray(dataObject.getString("patients"));
+        JSONObject addressObject = new JSONObject(dataObject.getString("address"));
+        JSONObject contactObject = new JSONObject(dataObject.getString("contact"));
+        JSONArray tagArrayObject =  new JSONArray(dataObject.getString("tags"));
+        JSONArray departmentArrayObject =  new JSONArray(dataObject.getString("departments"));
+        JSONArray servicesArrayObject = new JSONArray(dataObject.getString("services"));
+        JSONArray announcementArrayObject =  new JSONArray(dataObject.getString("announcements"));
+
+        // Deal With Tags
+        for (int i = 0; i < tagArrayObject.length(); i++){
+            JSONObject tagEachObject = new JSONObject(tagArrayObject.getString(i));
+            /*
+            {@value,_id}
+            * */
+        }
+
+        //Deal With Services
+        for (int i = 0; i < servicesArrayObject.length(); i++){
+            JSONObject servicesEachObject = new JSONObject(servicesArrayObject.getString(i));
+            /*
+            {@name,description, _id}
+            * */
+//            Log.e("=====Services Each==", String.valueOf(servicesEachObject));
+
+        }
+
+
+        //Deal With Departments
+        for (int i = 0; i < departmentArrayObject.length(); i++){
+            JSONObject departmentEachObject = new JSONObject(departmentArrayObject.getString(i));
+            String deptName  =  departmentEachObject.getString("name");
+            JSONArray deptRoomsArray = new JSONArray(departmentEachObject.getString("rooms"));
+
+            // Deal With Dep rooms
+            for (int j = 0; j < deptRoomsArray.length(); j++) {
+
+                String roomSex = new JSONObject( deptRoomsArray.getString(j) ).getString("sex");
+                JSONArray roomBedsArray = new JSONArray ( new JSONObject (deptRoomsArray.getString(j) ).getString("beds") );
+
+
+                // Deal With the Beads
+                for (int k = 0; k < roomBedsArray.length() ; k++) {
+                    /*
+                    {@name,tags, isOccupied, status, lastUsedBy}
+                    * */
+//                    Log.e("=====Bed Each==", String.valueOf(roomBedsArray.getString(k)));
+
+                }
+
+            }
+
+        }
+
+
+
+
+    }// end of formatJSON
+
+
+
+
 }

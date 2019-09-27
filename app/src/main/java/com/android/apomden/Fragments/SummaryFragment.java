@@ -15,8 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.apomden.Adapters.SummaryAdapter;
 import com.android.apomden.Models.Dashboard;
 import com.android.apomden.R;
+import com.android.apomden.Services.Responser;
+import com.android.apomden.Utilities.Globall;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -65,12 +70,18 @@ public class SummaryFragment extends Fragment {
         );
 
 
-        dashboards.add(dashboard);
-        dashboards.add(dashboard1);
-        dashboards.add(dashboard2);
-        dashboards.add(dashboard3);
+      Globall.dashboards = Arrays.asList(
+              dashboard, dashboard1, dashboard2, dashboard3
+      );
 
-        mAdapter =  new SummaryAdapter(dashboards);
+
+        try {
+            Globall.formatJson();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mAdapter =  new SummaryAdapter(Globall.dashboards);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
