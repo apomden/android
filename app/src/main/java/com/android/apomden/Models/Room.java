@@ -1,12 +1,13 @@
 package com.android.apomden.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
     private String sex, id;
-    private ArrayList<Bed> bedArrayList;
+    private List<Bed> bedArrayList;
 
-    public Room(String sex, String id, ArrayList<Bed> bedArrayList) {
+    public Room(String sex, String id, List<Bed> bedArrayList) {
         this.sex = sex;
         this.id = id;
         this.bedArrayList = bedArrayList;
@@ -29,7 +30,7 @@ public class Room {
     }
 
 
-    public ArrayList<Bed> getBedArrayList() {
+    public List<Bed> getBedArrayList() {
         return bedArrayList;
     }
 

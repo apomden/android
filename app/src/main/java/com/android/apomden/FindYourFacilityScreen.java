@@ -60,7 +60,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                             @Override
                             public void onSuccess(String string) {
 
-                                Log.e("===Passed===", string);
+//                                Log.e("===Passed===", string);
                                 editor.putString("facName",  Globall.selectedFacility.getDomain());
                                 editor.putString("lollipop", Globall.selectedFacility.getPassword());
                                 editor.putString("facId",    Globall.selectedFacility.getFacilityId());
@@ -70,6 +70,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
                                 Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
+                                Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId());
 
 
                                 Toast.makeText(
@@ -79,7 +80,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
                                 startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 
-                                Log.e("======sonnie======", Globall.currentFacilityUrl);
+//                                Log.e("======sonnie======", Globall.currentFacilityUrl);
 
 
 
@@ -150,6 +151,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                 editor.commit();
 
                 Globall.globallFacilities = facilityList;
+
 
                 pdialog.dismiss();
 

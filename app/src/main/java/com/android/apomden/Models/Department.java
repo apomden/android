@@ -2,12 +2,13 @@ package com.android.apomden.Models;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Department {
     private String id, name;
-    private ArrayList<Room> roomArrayList;
+    private List<Room> roomArrayList;
 
-    public Department(String id, String name, ArrayList<Room> roomArrayList) {
+    public Department(String id, String name, List<Room> roomArrayList) {
         this.id = id;
         this.name = name;
         this.roomArrayList = roomArrayList;
@@ -29,11 +30,11 @@ public class Department {
         this.name = name;
     }
 
-    public ArrayList<Room> getRoomArrayList() {
+    public List<Room> getRoomArrayList() {
         return roomArrayList;
     }
 
-    public void setRoomArrayList(ArrayList<Room> roomArrayList) {
+    public void setRoomArrayList(List<Room> roomArrayList) {
         this.roomArrayList = roomArrayList;
     }
 }

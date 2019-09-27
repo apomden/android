@@ -1,6 +1,7 @@
 package com.android.apomden.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,10 @@ public class SummaryFragment extends Fragment {
         textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.recView);
 
+
         Dashboard dashboard =  new Dashboard(
                 "Beds Available",
-                "16",
+                String.valueOf(Globall.bedList.size()),
                 getResources().getDrawable(R.drawable.pat),
                 getResources().getDrawable(R.drawable.green_mix)
         );
@@ -70,16 +72,9 @@ public class SummaryFragment extends Fragment {
         );
 
 
-      Globall.dashboards = Arrays.asList(
-              dashboard, dashboard1, dashboard2, dashboard3
-      );
-
-
-        try {
-            Globall.formatJson();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Globall.dashboards = Arrays.asList(
+                dashboard, dashboard1, dashboard2, dashboard3
+        );
 
         mAdapter =  new SummaryAdapter(Globall.dashboards);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

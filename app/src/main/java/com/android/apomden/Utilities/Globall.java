@@ -2,8 +2,14 @@ package com.android.apomden.Utilities;
 
 import android.util.Log;
 
+import com.android.apomden.Models.Bed;
+import com.android.apomden.Models.Contact;
 import com.android.apomden.Models.Dashboard;
+import com.android.apomden.Models.Department;
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Models.Room;
+import com.android.apomden.Models.Service;
+import com.android.apomden.Models.Tag;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
 import com.android.apomden.Services.INCLUDE;
@@ -34,10 +40,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Globall {
 
-    public static List<Facility> globallFacilities = null;
+    public static List<Facility> globallFacilities = new ArrayList<>();
     public static Facility selectedFacility = null;
     public static String currentFacilityUrl = null;
-    public static List<Dashboard> dashboards = null;
+    public static List<Dashboard> dashboards = new ArrayList<>();
+
+    public static List<Tag> tagList = new ArrayList<>();
+    public static List<Service> serviceList = new ArrayList<>();
+    public static List<Room> roomList = new ArrayList<>();
+    public static List<Department> departmentList = new ArrayList<>();
+    public static List<Bed> bedList = new ArrayList<>();
+    public static Contact contact = null;
+
+
+
+
+
+
 
 
 
@@ -75,7 +94,7 @@ public class Globall {
                 try {
 
                     String rep = String.valueOf(response.body().source().readUtf8());
-                    Log.e("=====results====", rep);
+//                    Log.e("=====results====", rep);
 
                     JSONObject jsonObject = new JSONObject(rep);
                     String status = jsonObject.getString("success");
@@ -229,8 +248,11 @@ public class Globall {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String rep = String.valueOf( response.body().source().readUtf8() );
-                    Log.e("===FacilityGet======", rep);
+                    formatJson(rep);
+
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -244,8 +266,8 @@ public class Globall {
 
     }
 
-    public static void formatJson () throws JSONException {
-        JSONObject jsonObject = new JSONObject(Mimicker.jsonFormat);
+    public static void formatJson ( String gottenString ) throws JSONException {
+        JSONObject jsonObject = new JSONObject(gottenString);
         JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
         JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
         JSONArray patientArrayObject =  new JSONArray(dataObject.getString("patients"));
@@ -256,21 +278,32 @@ public class Globall {
         JSONArray servicesArrayObject = new JSONArray(dataObject.getString("services"));
         JSONArray announcementArrayObject =  new JSONArray(dataObject.getString("announcements"));
 
+
         // Deal With Tags
         for (int i = 0; i < tagArrayObject.length(); i++){
             JSONObject tagEachObject = new JSONObject(tagArrayObject.getString(i));
-            /*
-            {@value,_id}
-            * */
+            // create Tags With Results
+
+            Tag tag = new Tag(
+                    tagEachObject.getString("_id"),
+                    tagEachObject.getString("value")
+            );
+
+            tagList.add(tag);
         }
+
 
         //Deal With Services
         for (int i = 0; i < servicesArrayObject.length(); i++){
             JSONObject servicesEachObject = new JSONObject(servicesArrayObject.getString(i));
-            /*
-            {@name,description, _id}
-            * */
-//            Log.e("=====Services Each==", String.valueOf(servicesEachObject));
+
+            Service service =  new Service(
+                    servicesEachObject.getString("name"),
+                    servicesEachObject.getString("description"),
+                    servicesEachObject.getString("_id")
+            );
+
+            serviceList.add(service);
 
         }
 
@@ -285,23 +318,56 @@ public class Globall {
             for (int j = 0; j < deptRoomsArray.length(); j++) {
 
                 String roomSex = new JSONObject( deptRoomsArray.getString(j) ).getString("sex");
+                String roomId = new JSONObject( deptRoomsArray.getString(j) ).getString("_id");
                 JSONArray roomBedsArray = new JSONArray ( new JSONObject (deptRoomsArray.getString(j) ).getString("beds") );
 
 
                 // Deal With the Beads
                 for (int k = 0; k < roomBedsArray.length() ; k++) {
+                    JSONObject roomBedEachObject = new JSONObject(roomBedsArray.getString(i));
                     /*
                     {@name,tags, isOccupied, status, lastUsedBy}
                     * */
-//                    Log.e("=====Bed Each==", String.valueOf(roomBedsArray.getString(k)));
+                    Bed bed = new Bed();
+                    bed.setId(roomBedEachObject.getString("_id"));
+                    bed.setName(roomBedEachObject.getString("name"));
+                    bed.setOccupied( Boolean.valueOf(roomBedEachObject.getString("isOccupied")) );
+                    bed.setStatus(roomBedEachObject.getString("status"));
+                    bedList.add(bed);
 
                 }
+                //
+
+                Room room = new Room(
+                        roomSex,
+                        roomId,
+                        bedList
+                );
+
+                roomList.add(room);
+
 
             }
 
+            Department department =  new Department(
+                    departmentEachObject.getString("_id"),
+                    deptName,
+                    roomList
+            );
+
+            departmentList.add(department);
         }
 
 
+        Log.e("=====Department==", String.valueOf(departmentList.size()));
+
+        Log.e("=====Tag==", String.valueOf(tagList.size()));
+
+        Log.e("=====Service List==", String.valueOf(serviceList.size()));
+
+        Log.e("=====Room Count==", String.valueOf(roomList.size()));
+
+        Log.e("=====Bed Count==", String.valueOf(bedList.size()));
 
 
     }// end of formatJSON

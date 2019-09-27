@@ -73,7 +73,15 @@ public class FacilityLoginScreen extends AppCompatActivity {
 
                             Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
-                            startActivity(new Intent(getApplicationContext(), FacilityDashboardScreen.class));
+                            Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId());
+
+
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Success",
+                                    Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
                         }
 
                         @Override
