@@ -29,7 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a Fragment1 (defined as a static inner class below).
+        // Return a  (defined as a static inner class below).
         return fragmentList.get(position);
     }
 

@@ -3,7 +3,6 @@ package com.android.apomden;
 import android.os.Bundle;
 
 import com.android.apomden.Fragments.BedFragment;
-import com.android.apomden.Fragments.Fragment1;
 import com.android.apomden.Fragments.ProfileFragment;
 import com.android.apomden.Fragments.SummaryFragment;
 import com.android.apomden.Fragments.TransferFragment;
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainDashboardScreen extends AppCompatActivity {
     private ViewPager viewPager;
