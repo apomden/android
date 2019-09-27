@@ -2,7 +2,12 @@ package com.android.apomden;
 
 import android.os.Bundle;
 
+import com.android.apomden.Fragments.BedFragment;
 import com.android.apomden.Fragments.Fragment1;
+import com.android.apomden.Fragments.ProfileFragment;
+import com.android.apomden.Fragments.SummaryFragment;
+import com.android.apomden.Fragments.TransferFragment;
+import com.android.apomden.Fragments.TransfersFragment;
 import com.android.apomden.Fragments.adapter.SectionsPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,14 +27,20 @@ public class MainDashboardScreen extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.nav_summary:
                     viewPager.setCurrentItem(0);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.nav_beds:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.nav_transfer:
                     viewPager.setCurrentItem(2);
+                    return true;
+                case R.id.nav_transfers:
+                    viewPager.setCurrentItem(3);
+                    return true;
+                case R.id.nav_profile:
+                    viewPager.setCurrentItem(4);
                     return true;
             }
             return false;
@@ -45,9 +56,11 @@ public class MainDashboardScreen extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
-        sectionsPagerAdapter.addFragment( new Fragment1(), "Frag 1");
-        sectionsPagerAdapter.addFragment( new Fragment1(), "Frag 2");
-        sectionsPagerAdapter.addFragment( new Fragment1(), "Frag 3");
+        sectionsPagerAdapter.addFragment( new SummaryFragment(), "Summary");
+        sectionsPagerAdapter.addFragment( new BedFragment(), "Beds");
+        sectionsPagerAdapter.addFragment( new TransferFragment(), "Transfer");
+        sectionsPagerAdapter.addFragment( new TransfersFragment(), "Transfers");
+        sectionsPagerAdapter.addFragment( new ProfileFragment(), "Profile");
         viewPager.setAdapter(sectionsPagerAdapter);
 
     }
