@@ -80,9 +80,6 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
                                 startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 
-//                                Log.e("======sonnie======", Globall.currentFacilityUrl);
-
-
 
                             }
 
