@@ -25,7 +25,7 @@
             android:id="@+id/textTop"
             android:textColor="#fff"
             android:textAlignment="center"
-            android:textSize="35dp"
+            android:textSize="23dp"
             android:padding="10dp"/>
         
         <TextView
@@ -35,7 +35,7 @@
             android:id="@+id/textAbove"
             android:textColor="#fff"
             android:textAlignment="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:padding="10dp"
             android:layout_alignRight="@+id/textTop"
             android:layout_alignEnd="@+id/textTop"
@@ -43,7 +43,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:padding="5dp"
             android:id="@+id/imageDisplay"
             android:src="@drawable/bar"
@@ -59,7 +59,7 @@
             android:id="@+id/textBeforeBox"
             android:textColor="#fff"
             android:textAlignment="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:padding="5dp"
             android:layout_alignRight="@+id/imageDisplay"
             android:layout_alignEnd="@+id/imageDisplay"

@@ -48,22 +48,13 @@ public class Globall {
     public static Facility selectedFacility = null;
     public static String currentFacilityUrl = null;
     public static List<Dashboard> dashboards = new ArrayList<>();
-
     public static List<Tag> tagList = new ArrayList<>();
     public static List<Service> serviceList = new ArrayList<>();
     public static List<Room> roomList = new ArrayList<>();
     public static List<Department> departmentList = new ArrayList<>();
     public static List<Bed> bedList = new ArrayList<>();
     public static Contact contact = null;
-
-
     public static List<Transfer> transferList =  new ArrayList<>();
-
-
-
-
-
-
 
 
 
@@ -314,6 +305,7 @@ public class Globall {
 
                 String roomSex = new JSONObject( deptRoomsArray.getString(j) ).getString("sex");
                 String roomId = new JSONObject( deptRoomsArray.getString(j) ).getString("_id");
+
                 JSONArray roomBedsArray = new JSONArray ( new JSONObject (deptRoomsArray.getString(j) ).getString("beds") );
 
 
@@ -328,6 +320,8 @@ public class Globall {
                     bed.setName(roomBedEachObject.getString("name"));
                     bed.setOccupied( Boolean.valueOf(roomBedEachObject.getString("isOccupied")) );
                     bed.setStatus(roomBedEachObject.getString("status"));
+                    bed.setSex(roomSex);
+                    bed.setRoomName(deptName);
                     bedList.add(bed);
 
                 }

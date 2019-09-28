@@ -2,7 +2,8 @@ package com.android.apomden.Models;
 
 public class Bed {
     private Boolean isOccupied;
-    private String id, name, status;
+    private String id, name, status, sex, roomName;
+
 
     public Bed(Boolean isOccupied, String id, String name, String status) {
         this.isOccupied = isOccupied;
@@ -52,4 +53,21 @@ public class Bed {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
 }
