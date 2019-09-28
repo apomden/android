@@ -408,6 +408,7 @@ public class Globall {
             transfer.setDiagnosisAndTreatmentGiven(transferObject.getString("diagnosisAndTreatmentGiven"));
             transfer.setImmediateReasonForReferral(transferObject.getString("immediateReasonForReferral"));
             transfer.setReferringStaff(transferObject.getString("referringStaff"));
+            transfer.setReferringStaffEmail(transferObject.getString("referringStaffEmail"));
             transfer.setAge(transferObject.getString("age"));
             transfer.setName(transferObject.getString("name"));
             transfer.setGender(transferObject.getString("gender"));
