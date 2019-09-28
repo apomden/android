@@ -13,9 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.apomden.Models.Department;
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Models.Transfer;
+import com.android.apomden.Services.FacilityDetailsResponser;
 import com.android.apomden.Services.Responser;
 import com.android.apomden.Services.SearchResponsor;
+import com.android.apomden.Services.TransferDetailsResponser;
 import com.android.apomden.Utilities.Globall;
 
 import java.util.List;
@@ -69,21 +73,42 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
 
                                 Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
+                                Globall.getFacilityTransfers(Globall.selectedFacility.getDomain(), new TransferDetailsResponser() {
+                                    @Override
+                                    public void onSuccess(List<Transfer> transfers) {
 
-                                Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId());
+                                        Log.e("==transfer==", String.valueOf(transfers.size()));
+                                        Globall.transferList = transfers;
 
-                                Globall.getFacilityTransfers(Globall.selectedFacility.getDomain());
+                                        Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {
+                                            @Override
+                                            public void onSuccess(List<Department> departments) {
+                                                Globall.departmentList = departments;
 
 
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "Success",
-                                        Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(
+                                                        getApplicationContext(),
+                                                        "Success",
+                                                        Toast.LENGTH_SHORT).show();
 
-                                pdialog.dismiss();
+                                                pdialog.dismiss();
 
-                                startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
+                                                startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 
+                                            }
+
+                                            @Override
+                                            public void onFailed(String string) {
+
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onFailed(String string) {
+
+                                    }
+                                });
 
                             }
 

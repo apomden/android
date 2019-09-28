@@ -14,9 +14,11 @@ import com.android.apomden.Models.Tag;
 import com.android.apomden.Models.Transfer;
 import com.android.apomden.Services.APISERVICE;
 import com.android.apomden.Services.FINDERSERVICE;
+import com.android.apomden.Services.FacilityDetailsResponser;
 import com.android.apomden.Services.INCLUDE;
 import com.android.apomden.Services.Responser;
 import com.android.apomden.Services.SearchResponsor;
+import com.android.apomden.Services.TransferDetailsResponser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -227,24 +229,10 @@ public class Globall {
     }
 
 
-    public static void getFacilityDetails (String facilityId){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        // init cookie manager
-        CookieHandler cookieHandler = new CookieManager();
-
-        OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(interceptor)
-                .cookieJar(new JavaNetCookieJar(cookieHandler))
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build();
-
+    public static void getFacilityDetails (String facilityId, final FacilityDetailsResponser responser){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.apomden.com/v2/facility/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
                 .build();
         INCLUDE service = retrofit.create(INCLUDE.class);
         Call<ResponseBody> result = service.sendUser(facilityId);
@@ -253,7 +241,7 @@ public class Globall {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String rep = String.valueOf( response.body().source().readUtf8() );
-                    formatFacilityDetailJson(rep);
+                    responser.onSuccess(formatFacilityDetailJson(rep));
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -265,13 +253,15 @@ public class Globall {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                responser.onFailed("Error");
             }
         });
 
     }
 
-    public static void formatFacilityDetailJson ( String gottenString ) throws JSONException {
+    public static List<Department> formatFacilityDetailJson (String gottenString) throws JSONException {
+        List<Department> returnDepartments = new ArrayList<>();
+
         JSONObject jsonObject = new JSONObject(gottenString);
         JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
         JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
@@ -360,27 +350,16 @@ public class Globall {
                     roomList
             );
 
-            departmentList.add(department);
+            returnDepartments.add(department);
         }
 
-        /*
-        Log.e("=====Department==", String.valueOf(departmentList.size()));
-
-        Log.e("=====Tag==", String.valueOf(tagList.size()));
-
-        Log.e("=====Service List==", String.valueOf(serviceList.size()));
-
-        Log.e("=====Room Count==", String.valueOf(roomList.size()));
-
-        Log.e("=====Bed Count==", String.valueOf(bedList.size()));
-        */
-
+        return returnDepartments;
 
     }// end of formatJSON
 
 
 
-    public static void getFacilityTransfers (String domain){
+    public static void getFacilityTransfers (String domain, final TransferDetailsResponser resp){
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -395,7 +374,7 @@ public class Globall {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String rep = String.valueOf( response.body().source().readUtf8() );
-                    formatTransferJson(rep);
+                    resp.onSuccess(formatTransferJson(rep));
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -406,14 +385,16 @@ public class Globall {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                resp.onFailed("error");
             }
         });
 
     }
 
 
-    public static void formatTransferJson (String stringToFormat) throws JSONException {
+    public static List<Transfer> formatTransferJson (String stringToFormat) throws JSONException {
+
+        List<Transfer> returnTransfer = new ArrayList<>();
 
         JSONObject dataObject = new JSONObject(stringToFormat);
         JSONArray dataArray = new JSONArray(dataObject.getString("data"));
@@ -476,36 +457,44 @@ public class Globall {
             );
 
             transfer.setDestinationDepertment(destinationDepartment);
-
-
-            /*{
-                originFacility{ _id, name, domain, type },
-                destinationFacility{ _id, name, domain, type } ,
-                originDepartment, { _id, name }
-                destinationDepartment,{ _id, name }
-                age,
-                gender,
-                isEmergency,
-                isConscious,
-                diagnosisAndTreatmentGiven,
-                immediateReasonForReferral,
-                referringStaff,
-                referringStaffEmail,
-                _id,
-                name,
-                gender,
-              }
-             *  */
-
-            transferList.add(transfer);
-
-
-            Log.e("======dataObject=====", String.valueOf(transferObject));
+            returnTransfer.add(transfer);
 
         }
 
-        Log.e("======Trans Obj=====", String.valueOf(transferList.size()));
+        return returnTransfer;
 
+    }
+
+
+    public static List<Transfer> getIncomingTransfers (List<Transfer> transfer) {
+
+        List<Transfer> transfers = new ArrayList<>();
+
+        for (int i = 0; i < transfer.size() ; i++) {
+
+            if (transfer.get(i).getDestinationFacility().getDomain().equals(selectedFacility.getDomain())){
+                transfers.add(transfer.get(i));
+            }
+        }
+
+        return transfers;
+
+
+    }
+
+
+    public static List<Transfer> getOutgoingTransfers (List<Transfer> transfer) {
+
+        List<Transfer> transfers = new ArrayList<>();
+
+        for (int i = 0; i < transfer.size() ; i++) {
+
+            if (transfer.get(i).getOriginFacility().getDomain().equals(selectedFacility.getDomain())){
+                transfers.add(transfer.get(i));
+            }
+        }
+
+        return transfers;
 
 
     }

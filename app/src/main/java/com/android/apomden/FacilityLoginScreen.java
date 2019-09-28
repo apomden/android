@@ -13,9 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.apomden.Models.Department;
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Models.Transfer;
+import com.android.apomden.Services.FacilityDetailsResponser;
 import com.android.apomden.Services.Responser;
+import com.android.apomden.Services.TransferDetailsResponser;
 import com.android.apomden.Utilities.Globall;
+
+import java.util.List;
 
 public class FacilityLoginScreen extends AppCompatActivity {
     Button enterMainScreen;
@@ -73,7 +79,30 @@ public class FacilityLoginScreen extends AppCompatActivity {
 
                             Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
-                            Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId());
+                            Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {
+                                @Override
+                                public void onSuccess(List<Department> departments) {
+                                    Globall.departmentList = departments;
+
+                                    Globall.getFacilityTransfers(Globall.selectedFacility.getDomain(), new TransferDetailsResponser() {
+                                        @Override
+                                        public void onSuccess(List<Transfer> transfers) {
+                                            Globall.transferList = transfers;
+                                        }
+
+                                        @Override
+                                        public void onFailed(String string) {
+
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailed(String string) {
+
+                                }
+                            });
+
 
 
                             Toast.makeText(

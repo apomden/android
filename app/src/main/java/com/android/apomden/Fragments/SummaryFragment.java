@@ -45,6 +45,13 @@ public class SummaryFragment extends Fragment {
         textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.recView);
 
+        Log.e("===Logger Dept===", String.valueOf(Globall.departmentList.size()));
+        Log.e("===Logger Transfer===", String.valueOf(Globall.transferList.size()));
+
+
+        Log.e("===Logger InComing===", String.valueOf(Globall.getIncomingTransfers(Globall.transferList).size()));
+        Log.e("===Logger OutGoing===", String.valueOf(Globall.getOutgoingTransfers(Globall.transferList).size()));
+
 
         Dashboard dashboard =  new Dashboard(
                 "Beds Available",
@@ -54,13 +61,13 @@ public class SummaryFragment extends Fragment {
         );
         Dashboard dashboard1 =  new Dashboard(
                 "Outgoing Transfers",
-                String.valueOf(Globall.transferList.size()),
+                String.valueOf((Globall.getOutgoingTransfers(Globall.transferList).size())),
                 getResources().getDrawable(R.drawable.tranfip),
                 getResources().getDrawable(R.drawable.black_mix)
         );
         Dashboard dashboard2 =  new Dashboard(
                 "Incoming Transfers & Emergencies",
-                "3",
+                String.valueOf(Globall.getIncomingTransfers(Globall.transferList).size()),
                 getResources().getDrawable(R.drawable.transabat),
                 getResources().getDrawable(R.drawable.red_mix)
         );
