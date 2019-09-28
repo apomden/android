@@ -48,7 +48,7 @@ public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecycl
     @Override
     public TransferRecyclerAdapter.UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View itemView = LayoutInflater.from(parent.getContext())
-                       .inflate(R.layout.incoming_transfer_item, parent, false);
+                       .inflate(R.layout.outgoing_transfer_item, parent, false);
 
        return new UserViewHolder(itemView);
     }

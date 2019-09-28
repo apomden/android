@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.apomden.Adapters.InComingTransferRecyclerAdapter;
 import com.android.apomden.Adapters.TransferRecyclerAdapter;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
@@ -24,7 +25,7 @@ public class IncomingTransferFragment extends Fragment {
     TextView textView;
 
     private RecyclerView recyclerView;
-    private TransferRecyclerAdapter mAdapter;
+    private InComingTransferRecyclerAdapter mAdapter;
 
 
     @Override
@@ -36,7 +37,7 @@ public class IncomingTransferFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.inTransRecView);
 
-        mAdapter =  new TransferRecyclerAdapter(
+        mAdapter =  new InComingTransferRecyclerAdapter(
                 Globall.getIncomingTransfers(Globall.transferList)
         );
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

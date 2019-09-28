@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         app:cardCornerRadius="8dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -22,8 +22,8 @@
 
             <ImageView
                 android:padding="10dp"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/patient"/>
 
             <LinearLayout
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
                     android:text="GW-1-B1"
-                    android:textSize="30dp"
+                    android:textSize="14dp"
                     android:id="@+id/bedName"
 
                     />
@@ -45,7 +45,7 @@
                     android:textColor="#fff"
                     android:layout_height="wrap_content"
                     android:text="OCCUPIED"
-                    android:textSize="20dp"
+                    android:textSize="8dp"
                     android:id="@+id/occupancy"
 
                     />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
                 android:text="MALE"
-                android:textSize="25dp"
+                android:textSize="11dp"
                 android:id="@+id/gender"
                 />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
                 android:text="ICU"
-                android:textSize="12dp"
+                android:textSize="6dp"
                 android:id="@+id/wardBedIn"
                 />
         </LinearLayout>
