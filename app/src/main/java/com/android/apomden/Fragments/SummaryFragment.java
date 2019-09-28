@@ -80,7 +80,7 @@ public class SummaryFragment extends Fragment {
 
 
         Globall.dashboards = Arrays.asList(
-                dashboard, dashboard1, dashboard2, dashboard3
+                dashboard, dashboard1, dashboard2
         );
 
         mAdapter =  new SummaryAdapter(Globall.dashboards);
