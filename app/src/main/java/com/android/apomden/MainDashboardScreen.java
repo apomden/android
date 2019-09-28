@@ -5,8 +5,8 @@ import android.os.Bundle;
 import com.android.apomden.Fragments.BedFragment;
 import com.android.apomden.Fragments.ProfileFragment;
 import com.android.apomden.Fragments.SummaryFragment;
-import com.android.apomden.Fragments.TransferFragment;
-import com.android.apomden.Fragments.TransfersFragment;
+import com.android.apomden.Fragments.OutgoingTransferFragment;
+import com.android.apomden.Fragments.IncomingTransferFragment;
 import com.android.apomden.Fragments.adapter.SectionsPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,8 +56,8 @@ public class MainDashboardScreen extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         sectionsPagerAdapter.addFragment( new SummaryFragment(), "Summary");
         sectionsPagerAdapter.addFragment( new BedFragment(), "Beds");
-        sectionsPagerAdapter.addFragment( new TransferFragment(), "Transfer");
-        sectionsPagerAdapter.addFragment( new TransfersFragment(), "Transfers");
+        sectionsPagerAdapter.addFragment( new OutgoingTransferFragment(), "Transfer");
+        sectionsPagerAdapter.addFragment( new IncomingTransferFragment(), "Transfers");
         sectionsPagerAdapter.addFragment( new ProfileFragment(), "Profile");
         viewPager.setAdapter(sectionsPagerAdapter);
 

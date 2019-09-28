@@ -15,7 +15,7 @@ import com.android.apomden.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TransfersFragment extends Fragment {
+public class OutgoingTransferFragment extends Fragment {
     TextView textView;
 
 
@@ -23,7 +23,7 @@ public class TransfersFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.transfers_fragment, container, false);
+        View view = inflater.inflate(R.layout.outgoing_transfer_fragment, container, false);
         textView = view.findViewById(R.id.section_label);
 
         return view;
