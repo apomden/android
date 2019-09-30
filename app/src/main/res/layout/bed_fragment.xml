@@ -22,7 +22,7 @@
             android:layout_marginBottom="20dp"
             android:hint="Search Beds"
             android:padding="15dp"
-            android:drawableStart="@drawable/email"
+            android:drawableEnd="@drawable/search_green"
             android:drawablePadding="10dp"
             android:background="@drawable/rect_text_edit_white"
             android:paddingBottom="15dp"
