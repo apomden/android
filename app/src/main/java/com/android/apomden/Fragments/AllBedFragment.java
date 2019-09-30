@@ -67,7 +67,7 @@ public class AllBedFragment extends Fragment {
             public void onItemClick(int position) {
                 Toast.makeText(
                         getActivity(),
-                        Globall.bedList.get(position).getName(),
+                        mAdapter.getBedList().get(position).getName(),
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -110,7 +110,7 @@ public class AllBedFragment extends Fragment {
             }
         }
 
-        mAdapter.setBedList(filteredList);
+        mAdapter.filterList(filteredList);
 
     }
 

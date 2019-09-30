@@ -1,5 +1,6 @@
 package com.android.apomden.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,12 @@ import com.android.apomden.Models.Bed;
 import com.android.apomden.Models.Dashboard;
 import com.android.apomden.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.UserViewHolder> {
 
     private List<Bed> bedList;
-    private List<Bed> filteredBedList;
 
     private OnItemClickListener mListener;
 
@@ -46,19 +47,7 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
             sex = itemView.findViewById(R.id.gender);
             ward =  itemView.findViewById(R.id.wardBedIn);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                    if(listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
-                    }
-
-                }
-            });
 
         }
     }
@@ -79,13 +68,27 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BedRecyclerAdapter.UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final BedRecyclerAdapter.UserViewHolder holder, int position) {
+
         Bed bed = bedList.get(position);
         holder.name.setText(bed.getName());
         holder.status.setText(bed.getStatus());
         holder.sex.setText(bed.getSex());
         holder.ward.setText(bed.getRoomName());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(mListener != null){
+                    int position = holder.getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        mListener.onItemClick(position);
+                    }
+                }
+
+            }
+        });
     }
 
 
