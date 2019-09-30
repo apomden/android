@@ -42,7 +42,7 @@ public class SummaryFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.summary_fragment, container, false);
-        textView = view.findViewById(R.id.section_label);
+//        textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.recView);
 
         Log.e("===Logger Dept===", String.valueOf(Globall.departmentList.size()));
@@ -80,7 +80,7 @@ public class SummaryFragment extends Fragment {
 
 
         Globall.dashboards = Arrays.asList(
-                dashboard, dashboard1, dashboard2
+                dashboard, dashboard1, dashboard2, dashboard3
         );
 
         mAdapter =  new SummaryAdapter(Globall.dashboards);

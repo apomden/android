@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
-import com.android.apomden.Adapters.TransferRecyclerAdapter;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
 
@@ -22,31 +21,36 @@ import com.android.apomden.Utilities.Globall;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class OutgoingTransferFragment extends Fragment {
+public class ServicesFragment extends Fragment {
     TextView textView;
 
     private RecyclerView recyclerView;
-    private TransferRecyclerAdapter mAdapter;
+    private BedRecyclerAdapter mAdapter;
+
 
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.outgoing_transfer_fragment, container, false);
+        View view = inflater.inflate(R.layout.bed_fragment, container, false);
+
 //        textView = view.findViewById(R.id.section_label);
 
-        recyclerView = view.findViewById(R.id.outTransRecView);
+        /*
+        recyclerView = view.findViewById(R.id.bedRecView);
 
-        mAdapter =  new TransferRecyclerAdapter(
-                Globall.getOutgoingTransfers(Globall.transferList)
-        );
+        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
+
+        mAdapter =  new BedRecyclerAdapter(Globall.bedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+        */
+
 
         return view;
     }

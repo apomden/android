@@ -8,15 +8,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.android.apomden.Fragments.adapter.SectionsPagerAdapter;
+import com.android.apomden.MainDashboardScreen;
 import com.android.apomden.R;
+import com.google.android.material.tabs.TabLayout;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class ProfileFragment extends Fragment {
-    TextView textView;
+//    TextView textView;
 
 
     @Override
@@ -24,8 +28,26 @@ public class ProfileFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        textView = view.findViewById(R.id.section_label);
+//        textView = view.findViewById(R.id.section_label);
+
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        // Set Tabs inside Toolbar
+        TabLayout tabs = view.findViewById(R.id.result_tabs);
+        tabs.setupWithViewPager(viewPager);
 
         return view;
+    }
+
+    // Add Fragments to Tabs
+    private void setupViewPager(ViewPager viewPager) {
+
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
+        adapter.addFragment(new IncomingTransferFragment(), "Today");
+        adapter.addFragment(new OutgoingTransferFragment(), "My Teams");
+        viewPager.setAdapter(adapter);
+
+
     }
 }

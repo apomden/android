@@ -41,7 +41,7 @@ public class BedFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bed_fragment, container, false);
 
-        textView = view.findViewById(R.id.section_label);
+//        textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.bedRecView);
 
         Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));

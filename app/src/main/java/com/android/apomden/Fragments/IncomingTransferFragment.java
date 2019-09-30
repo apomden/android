@@ -33,7 +33,7 @@ public class IncomingTransferFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.incoming_transfer_fragment, container, false);
-        textView = view.findViewById(R.id.section_label);
+//        textView = view.findViewById(R.id.section_label);
 
         recyclerView = view.findViewById(R.id.inTransRecView);
 
