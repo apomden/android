@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
+import com.android.apomden.Adapters.DepartmentRecyclerAdapter;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
 
@@ -22,10 +23,9 @@ import com.android.apomden.Utilities.Globall;
  * A placeholder fragment containing a simple view.
  */
 public class DepartmentFragment extends Fragment {
-    TextView textView;
 
     private RecyclerView recyclerView;
-    private BedRecyclerAdapter mAdapter;
+    private DepartmentRecyclerAdapter mAdapter;
 
 
 
@@ -35,14 +35,12 @@ public class DepartmentFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bed_fragment, container, false);
 
-//        textView = view.findViewById(R.id.section_label);
-
 
         recyclerView = view.findViewById(R.id.bedRecView);
 
         Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
 
-        mAdapter =  new BedRecyclerAdapter(Globall.bedList);
+        mAdapter =  new DepartmentRecyclerAdapter(Globall.departmentList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
