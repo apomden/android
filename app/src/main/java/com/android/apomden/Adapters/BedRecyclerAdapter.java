@@ -87,14 +87,22 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
     }
 
 
+    public List<Bed> getBedList() {
+        return bedList;
+    }
+
+    public void setBedList(List<Bed> bedList) {
+        this.bedList = bedList;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
         return bedList.size();
     }
 
-    public void filterList (List<Bed> filterdList){
-        bedList = filterdList;
+    public void filterList (List<Bed> filteredList){
+        this.bedList = filteredList;
         notifyDataSetChanged();
     }
 }

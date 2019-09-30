@@ -110,7 +110,7 @@ public class AllBedFragment extends Fragment {
             }
         }
 
-        mAdapter.filterList(filteredList);
+        mAdapter.setBedList(filteredList);
 
     }
 
