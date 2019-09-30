@@ -1,4 +1,4 @@
-package com.android.apomden.Fragments;
+package com.android.apomden.Fragments.Routers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
+import com.android.apomden.Fragments.AllBedFragment;
+import com.android.apomden.Fragments.DepartmentFragment;
 import com.android.apomden.R;
 import com.google.android.material.tabs.TabLayout;
 

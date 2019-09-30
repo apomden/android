@@ -2,13 +2,12 @@ package com.android.apomden;
 
 import android.os.Bundle;
 
-import com.android.apomden.Fragments.BedRouterFragment;
-import com.android.apomden.Fragments.ProfileRouterFragment;
+import com.android.apomden.Fragments.Routers.BedRouterFragment;
+import com.android.apomden.Fragments.Routers.ProfileRouterFragment;
 import com.android.apomden.Fragments.SummaryFragment;
-import com.android.apomden.Fragments.OutgoingTransferFragment;
 import com.android.apomden.Fragments.IncomingTransferFragment;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
-import com.android.apomden.Fragments.TransferRouterFragment;
+import com.android.apomden.Fragments.Routers.TransferRouterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
