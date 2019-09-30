@@ -21,7 +21,7 @@ import com.android.apomden.Utilities.Globall;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RoomDetailFragment extends Fragment {
+public class AllBedFragment extends Fragment {
     TextView textView;
 
     private RecyclerView recyclerView;
@@ -35,7 +35,9 @@ public class RoomDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bed_fragment, container, false);
 
-//        textView = view.findViewById(R.id.section_label);
+        // Set Up Recycler View
+
+
         recyclerView = view.findViewById(R.id.bedRecView);
 
         Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
@@ -49,6 +51,8 @@ public class RoomDetailFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
 
+
         return view;
     }
+
 }

@@ -2,12 +2,13 @@ package com.android.apomden;
 
 import android.os.Bundle;
 
-import com.android.apomden.Fragments.BedFragment;
-import com.android.apomden.Fragments.ProfileFragment;
+import com.android.apomden.Fragments.BedRouterFragment;
+import com.android.apomden.Fragments.ProfileRouterFragment;
 import com.android.apomden.Fragments.SummaryFragment;
 import com.android.apomden.Fragments.OutgoingTransferFragment;
 import com.android.apomden.Fragments.IncomingTransferFragment;
-import com.android.apomden.Fragments.adapter.SectionsPagerAdapter;
+import com.android.apomden.Adapters.SectionsPagerAdapter;
+import com.android.apomden.Fragments.TransferRouterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,10 +56,10 @@ public class MainDashboardScreen extends AppCompatActivity {
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         sectionsPagerAdapter.addFragment( new SummaryFragment(), "Summary");
-        sectionsPagerAdapter.addFragment( new BedFragment(), "Beds");
-        sectionsPagerAdapter.addFragment( new OutgoingTransferFragment(), "Transfer");
+        sectionsPagerAdapter.addFragment( new BedRouterFragment(), "Beds");
+        sectionsPagerAdapter.addFragment( new TransferRouterFragment(), "Transfer");
         sectionsPagerAdapter.addFragment( new IncomingTransferFragment(), "Transfers");
-        sectionsPagerAdapter.addFragment( new ProfileFragment(), "Profile");
+        sectionsPagerAdapter.addFragment( new ProfileRouterFragment(), "Profile");
         viewPager.setAdapter(sectionsPagerAdapter);
 
     }

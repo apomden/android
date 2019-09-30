@@ -1,4 +1,4 @@
-package com.android.apomden.Fragments.adapter;
+package com.android.apomden.Adapters;
 
 import android.content.Context;
 

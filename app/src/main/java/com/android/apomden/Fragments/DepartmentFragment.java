@@ -14,20 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
-import com.android.apomden.Adapters.SummaryAdapter;
-import com.android.apomden.Models.Bed;
-import com.android.apomden.Models.Dashboard;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class BedFragment extends Fragment {
+public class DepartmentFragment extends Fragment {
     TextView textView;
 
     private RecyclerView recyclerView;
@@ -42,6 +36,8 @@ public class BedFragment extends Fragment {
         View view = inflater.inflate(R.layout.bed_fragment, container, false);
 
 //        textView = view.findViewById(R.id.section_label);
+
+
         recyclerView = view.findViewById(R.id.bedRecView);
 
         Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
@@ -53,6 +49,7 @@ public class BedFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+
 
 
         return view;

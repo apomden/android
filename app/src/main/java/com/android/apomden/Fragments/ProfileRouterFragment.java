@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.android.apomden.Fragments.adapter.SectionsPagerAdapter;
-import com.android.apomden.MainDashboardScreen;
+import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -19,7 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileRouterFragment extends Fragment {
 //    TextView textView;
 
 
@@ -27,7 +25,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.profile_fragment, container, false);
+        View view = inflater.inflate(R.layout.profile_router, container, false);
 //        textView = view.findViewById(R.id.section_label);
 
         ViewPager viewPager = view.findViewById(R.id.viewpager);
