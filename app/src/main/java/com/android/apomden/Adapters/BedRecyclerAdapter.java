@@ -19,6 +19,7 @@ import java.util.List;
 public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.UserViewHolder> {
 
     private List<Bed> bedList;
+    private List<Bed> filteredBedList;
 
     private OnItemClickListener mListener;
 
@@ -65,6 +66,7 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
 
     public BedRecyclerAdapter(List<Bed> bedList){
         this.bedList = bedList;
+
     }
 
     @NonNull
