@@ -86,6 +86,8 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return bedList.size();

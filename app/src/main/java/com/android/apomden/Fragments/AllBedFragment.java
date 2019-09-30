@@ -100,12 +100,18 @@ public class AllBedFragment extends Fragment {
         List<Bed> filteredList = new ArrayList<>();
 
         for(Bed bedItem: bedList) {
-            if (bedItem.getName().toLowerCase().contains(textString.toLowerCase())){
+            Boolean nameMatches = bedItem.getName().toLowerCase().contains(textString.toLowerCase());
+            Boolean genderMatches = bedItem.getSex().toLowerCase().contains(textString.toLowerCase());
+            Boolean departmentMatches =  bedItem.getRoomName().toLowerCase().contains(textString.toLowerCase());
+            Boolean statusMatches = bedItem.getStatus().toLowerCase().contains(textString.toLowerCase());
+
+            if (nameMatches || genderMatches || departmentMatches || statusMatches){
                 filteredList.add(bedItem);
             }
         }
 
         mAdapter.filterList(filteredList);
+
     }
 
 }
