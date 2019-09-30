@@ -90,4 +90,9 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
     public int getItemCount() {
         return bedList.size();
     }
+
+    public void filterList (List<Bed> filterdList){
+        bedList = filterdList;
+        notifyDataSetChanged();
+    }
 }

@@ -1,10 +1,13 @@
 package com.android.apomden.Fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,18 +18,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
+import com.android.apomden.Models.Bed;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class AllBedFragment extends Fragment {
-    TextView textView;
 
+    EditText searchBed;
     private RecyclerView recyclerView;
     private BedRecyclerAdapter mAdapter;
+    List<Bed> bedList;
 
 
 
@@ -40,10 +48,13 @@ public class AllBedFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.bedRecView);
+        searchBed = view.findViewById(R.id.searchBed);
 
-        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
+        bedList = Globall.bedList;
+        Log.e("====Beds=====", String.valueOf(bedList.size()));
 
-        mAdapter =  new BedRecyclerAdapter(Globall.bedList);
+
+        mAdapter =  new BedRecyclerAdapter(bedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -63,7 +74,38 @@ public class AllBedFragment extends Fragment {
 
 
 
+        searchBed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString().trim());
+            }
+        });
+
+
+
         return view;
+    }
+
+    private void filter (String textString){
+        List<Bed> filteredList = new ArrayList<>();
+
+        for(Bed bedItem: bedList) {
+            if (bedItem.getName().toLowerCase().contains(textString.toLowerCase())){
+                filteredList.add(bedItem);
+            }
+        }
+
+        mAdapter.filterList(filteredList);
     }
 
 }
