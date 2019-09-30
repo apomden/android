@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -90,6 +91,16 @@ public class SummaryFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+
+        mAdapter.setOnItemClickListener(new SummaryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(
+                        getActivity(),
+                        Globall.dashboards.get(position).getTitle(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

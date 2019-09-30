@@ -19,9 +19,19 @@ import java.util.List;
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.UserViewHolder> {
 
     private List<Dashboard> userList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
 
 
-    public class UserViewHolder extends RecyclerView.ViewHolder {
+    public  void setOnItemClickListener (OnItemClickListener listener){
+        mListener = listener;
+    }
+
+
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
 
         public TextView titleText, numberOfItems;
         public LinearLayout linearLayout;
@@ -29,12 +39,26 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.UserView
 
 
 
-        public UserViewHolder(@NonNull View itemView) {
+        public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             titleText = itemView.findViewById(R.id.titleText);
             numberOfItems = itemView.findViewById(R.id.numberOfBed);
             linearLayout = itemView.findViewById(R.id.linLayout);
             imageView = itemView.findViewById(R.id.imageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
         }
     }
 
@@ -49,7 +73,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.UserView
        View itemView = LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.summary_card_item, parent, false);
 
-       return new UserViewHolder(itemView);
+       return new UserViewHolder(itemView, mListener);
     }
 
     @Override

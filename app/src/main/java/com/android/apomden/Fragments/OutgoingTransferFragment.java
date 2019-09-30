@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
 import com.android.apomden.Adapters.TransferRecyclerAdapter;
+import com.android.apomden.Models.Transfer;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
+
+import java.util.List;
 
 
 /**
@@ -37,9 +41,10 @@ public class OutgoingTransferFragment extends Fragment {
 //        textView = view.findViewById(R.id.section_label);
 
         recyclerView = view.findViewById(R.id.outTransRecView);
+        final List<Transfer> outGoing = Globall.getOutgoingTransfers(Globall.transferList);
 
         mAdapter =  new TransferRecyclerAdapter(
-                Globall.getOutgoingTransfers(Globall.transferList)
+                outGoing
         );
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -47,6 +52,16 @@ public class OutgoingTransferFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+
+        mAdapter.setOnItemClickListener(new TransferRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(
+                        getActivity(),
+                        outGoing.get(position).getName(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

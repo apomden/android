@@ -16,6 +16,16 @@ import java.util.List;
 public class InComingTransferRecyclerAdapter extends RecyclerView.Adapter<InComingTransferRecyclerAdapter.UserViewHolder> {
 
     private List<Transfer> transferList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
+    public  void setOnItemClickListener (OnItemClickListener listener){
+        mListener = listener;
+    }
 
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -26,7 +36,7 @@ public class InComingTransferRecyclerAdapter extends RecyclerView.Adapter<InComi
 
 
 
-        public UserViewHolder(@NonNull View itemView) {
+        public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             patientName = itemView.findViewById(R.id.patientName);
             originClinic = itemView.findViewById(R.id.originClinic);
@@ -35,6 +45,20 @@ public class InComingTransferRecyclerAdapter extends RecyclerView.Adapter<InComi
             referringStaffEmail = itemView.findViewById(R.id.referringStaffEmail);
             destinationFacility = itemView.findViewById(R.id.destinationFacility);
             destinationDepartment = itemView.findViewById(R.id.destinationDepartment);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
         }
     }
 
@@ -49,7 +73,7 @@ public class InComingTransferRecyclerAdapter extends RecyclerView.Adapter<InComi
        View itemView = LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.incoming_transfer_item, parent, false);
 
-       return new UserViewHolder(itemView);
+       return new UserViewHolder(itemView, mListener);
     }
 
     @Override

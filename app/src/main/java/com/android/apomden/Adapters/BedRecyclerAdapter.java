@@ -20,6 +20,17 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
 
     private List<Bed> bedList;
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
+    public  void setOnItemClickListener (OnItemClickListener listener){
+        mListener = listener;
+    }
+
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,13 +38,26 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
 
 
 
-
-        public UserViewHolder(@NonNull View itemView) {
+        public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             name = itemView.findViewById(R.id.bedName);
             status = itemView.findViewById(R.id.occupancy);
             sex = itemView.findViewById(R.id.gender);
             ward =  itemView.findViewById(R.id.wardBedIn);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
 
         }
     }
@@ -49,7 +73,7 @@ public class BedRecyclerAdapter extends RecyclerView.Adapter<BedRecyclerAdapter.
        View itemView = LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.bed_card_item, parent, false);
 
-       return new UserViewHolder(itemView);
+       return new UserViewHolder(itemView, mListener);
     }
 
     @Override

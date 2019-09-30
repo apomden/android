@@ -4,19 +4,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.apomden.Models.Bed;
 import com.android.apomden.Models.Transfer;
 import com.android.apomden.R;
-
 import java.util.List;
 
 public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecyclerAdapter.UserViewHolder> {
 
     private List<Transfer> transferList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
+    public  void setOnItemClickListener (OnItemClickListener listener){
+        mListener = listener;
+    }
 
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -25,9 +31,7 @@ public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecycl
                 referringStaffEmail, destinationFacility, destinationDepartment;
 
 
-
-
-        public UserViewHolder(@NonNull View itemView) {
+        public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             patientName = itemView.findViewById(R.id.patientName);
             originClinic = itemView.findViewById(R.id.originClinic);
@@ -36,8 +40,23 @@ public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecycl
             referringStaffEmail = itemView.findViewById(R.id.referringStaffEmail);
             destinationFacility = itemView.findViewById(R.id.destinationFacility);
             destinationDepartment = itemView.findViewById(R.id.destinationDepartment);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
         }
     }
+
 
 
     public TransferRecyclerAdapter(List<Transfer> transferList){
@@ -50,7 +69,7 @@ public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecycl
        View itemView = LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.outgoing_transfer_item, parent, false);
 
-       return new UserViewHolder(itemView);
+       return new UserViewHolder(itemView, mListener);
     }
 
     @Override
