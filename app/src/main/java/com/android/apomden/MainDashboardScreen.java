@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.android.apomden.Fragments.Routers.BedRouterFragment;
 import com.android.apomden.Fragments.Routers.ProfileRouterFragment;
+import com.android.apomden.Fragments.ServicesFragment;
 import com.android.apomden.Fragments.SummaryFragment;
 import com.android.apomden.Fragments.IncomingTransferFragment;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
@@ -56,8 +57,8 @@ public class MainDashboardScreen extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         sectionsPagerAdapter.addFragment( new SummaryFragment(), "Summary");
         sectionsPagerAdapter.addFragment( new BedRouterFragment(), "Beds");
-        sectionsPagerAdapter.addFragment( new TransferRouterFragment(), "Transfer");
-        sectionsPagerAdapter.addFragment( new IncomingTransferFragment(), "Transfers");
+        sectionsPagerAdapter.addFragment( new TransferRouterFragment(), "Transfers");
+        sectionsPagerAdapter.addFragment( new ServicesFragment(), "Services");
         sectionsPagerAdapter.addFragment( new ProfileRouterFragment(), "Profile");
         viewPager.setAdapter(sectionsPagerAdapter);
 

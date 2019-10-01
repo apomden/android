@@ -73,7 +73,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         holder.name.setText(department.getName());
         holder.stat.setText(result.get(0));
         holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
-        holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4));
+        holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4) + " Uni: " + result.get(5));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +125,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         List<Bed> unoccupiedBeds = new ArrayList<>();
         List<Bed> girlsBed = new ArrayList<>();
         List<Bed> boysBed  = new ArrayList<>();
+        List<Bed> unisexBed = new ArrayList<>();
 
 
         for (int i = 0; i < bedList.size(); i++) {
@@ -148,8 +149,10 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         for (int i = 0; i < deptBeds.size(); i++) {
             if (deptBeds.get(i).getSex().equalsIgnoreCase("MALE")) {
                 boysBed.add(deptBeds.get(i));
-            } else {
+            } else if (deptBeds.get(i).getSex().equalsIgnoreCase("FEMALE"))  {
                 girlsBed.add(deptBeds.get(i));
+            } else {
+                unisexBed.add(deptBeds.get(i));
             }
         }
 
@@ -162,6 +165,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         result.add(String.valueOf(unoccupiedBeds.size()));
         result.add(String.valueOf(girlsBed.size()));
         result.add(String.valueOf(boysBed.size()));
+        result.add(String.valueOf(unisexBed.size()));
 
 
         return result;
