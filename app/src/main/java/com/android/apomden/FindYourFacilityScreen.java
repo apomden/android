@@ -22,7 +22,9 @@ import com.android.apomden.Services.SearchResponsor;
 import com.android.apomden.Services.TransferDetailsResponser;
 import com.android.apomden.Utilities.Globall;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FindYourFacilityScreen extends AppCompatActivity {
     Button btnFind;
@@ -43,26 +45,61 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
 
+//        editor.clear();
+
+
+
         if(pref.contains("email")){
 
             String emailUsedPreviously = pref.getString("email", "email");
+            Log.e("====nyenya===", pref.getString("lollipop", "lollipop"));
 
             if(pref.contains("lollipop")){
+//                editor.clear();
                 String lollipop = pref.getString("lollipop", "lollipop");
-                String facName  = pref.getString("facName", "facName");
-                String facId    = pref.getString("facId", "facId");
+                String facName  = pref.getString("facilityName", "facilityName");
+                String facId    = pref.getString("facilityId", "facilityId");
+                String facilityEmail = pref.getString("facEmail", "facEmail");
+                String facilityDomain = pref.getString("facilityDomain", "facilityDomain");
+                String facilityCountry = pref.getString("facilityCountry", "facilityCountry");
+                String facilityCity = pref.getString("facilityCity", "facilityCity");
+                String facilityRegion = pref.getString("facilityRegion", "facilityRegion");
+                String facilityStreet = pref.getString("facilityStreet", "facilityStreet");
+                String facilityDistrict = pref.getString("facilityDistrict", "facilityDistrict");
 
-                Globall.selectedFacility =  new Facility(emailUsedPreviously, facId, lollipop, facName);
+                Log.e("====email===", facName);
+                Log.e("====Scolaris=====", pref.getString("facEmail", "facEmail"));
+
+                final Facility facility   = new Facility();
+
+                facility.setPassword(lollipop);
+                facility.setFacilityName(facName);
+                facility.setEmail(facilityEmail);
+                facility.setFacilityId(facId);
+                facility.setDomain(facilityDomain);
+                facility.setFacilityCountry(facilityCountry);
+                facility.setFacilityCity(facilityCity);
+                facility.setFacilityRegion(facilityRegion);
+                facility.setFacilityStreet(facilityStreet);
+                facility.setFacilityDistrict(facilityDistrict);
+
 
                 //start dialog
                 pdialog.setTitle("Logging You Into " + facName + " with email " + emailUsedPreviously + " Please Wait...");
                 pdialog.setIndeterminate(true);
                 pdialog.show();
 
+                Globall.selectedFacility = facility;
+
+                Log.e("====Name===", facName);
+                Log.e("====City=====", Globall.selectedFacility.getFacilityCity());
+
+
 
                 Globall.logUserIn(Globall.selectedFacility, "user/login/", new Responser() {
                             @Override
                             public void onSuccess(String string) {
+
 
 //                                Log.e("===Passed===", string);
                                 editor.putString("facName",  Globall.selectedFacility.getDomain());
@@ -122,13 +159,10 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                         });
             }
 
-            /*
-            // load the facilities belonging to the email previously entered
 
-            searchWithEmail(emailUsedPreviously);
-            */
 
         }
+
 
 
 

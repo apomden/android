@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.Fragments.IncomingTransferFragment;
 import com.android.apomden.Fragments.OutgoingTransferFragment;
+import com.android.apomden.Fragments.ProfileFragment;
 import com.android.apomden.R;
 import com.android.apomden.Utilities.Globall;
 import com.google.android.material.tabs.TabLayout;
@@ -49,7 +50,7 @@ public class ProfileRouterFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
-        adapter.addFragment(new IncomingTransferFragment(), "My Profile");
+        adapter.addFragment(new ProfileFragment(), "My Profile");
         adapter.addFragment(new OutgoingTransferFragment(), "Change Password");
         viewPager.setAdapter(adapter);
 

@@ -65,9 +65,7 @@ public class FacilityLoginScreen extends AppCompatActivity {
                         @Override
                         public void onSuccess(String string) {
                             Log.e("===Passed===", string);
-                            editor.putString("facName",  Globall.selectedFacility.getDomain());
                             editor.putString("lollipop", Globall.selectedFacility.getPassword());
-                            editor.putString("facId",    Globall.selectedFacility.getFacilityId());
                             editor.commit();
 
                             pdialog.dismiss();
@@ -79,15 +77,26 @@ public class FacilityLoginScreen extends AppCompatActivity {
 
                             Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
-                            Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {
+                            Globall.getFacilityTransfers(Globall.selectedFacility.getDomain(), new TransferDetailsResponser() {
                                 @Override
-                                public void onSuccess(List<Department> departments) {
-                                    Globall.departmentList = departments;
+                                public void onSuccess(List<Transfer> transfers) {
+                                    Globall.transferList = transfers;
 
-                                    Globall.getFacilityTransfers(Globall.selectedFacility.getDomain(), new TransferDetailsResponser() {
+                                    Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {
                                         @Override
-                                        public void onSuccess(List<Transfer> transfers) {
-                                            Globall.transferList = transfers;
+                                        public void onSuccess(List<Department> departments) {
+                                            Globall.departmentList = departments;
+
+
+                                            Toast.makeText(
+                                                    getApplicationContext(),
+                                                    "Success",
+                                                    Toast.LENGTH_SHORT).show();
+
+                                            startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
+
+
+
                                         }
 
                                         @Override
@@ -105,12 +114,6 @@ public class FacilityLoginScreen extends AppCompatActivity {
 
 
 
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Success",
-                                    Toast.LENGTH_SHORT).show();
-
-                            startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
                         }
 
                         @Override
