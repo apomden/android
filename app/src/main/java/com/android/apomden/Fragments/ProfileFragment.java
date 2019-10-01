@@ -2,6 +2,7 @@ package com.android.apomden.Fragments;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,10 @@ import com.android.apomden.Utilities.Globall;
  */
 public class ProfileFragment extends Fragment {
 
-     TextView profileFacilityName, profileFacilityCity;
+     private TextView profileFacilityName, profileDepartments,
+             profileFacilityCity, secondaryPhoneNumber,
+             primaryEmail, profileTranfers, secondaryEmail,
+             primaryPhoneNumber,profileBedsNumber, profileServices;
 
 
 
@@ -34,11 +38,27 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.facility_profile, container, false);
         profileFacilityName = view.findViewById(R.id.profileFacilityName);
         profileFacilityCity = view.findViewById(R.id.profileFacilityCity);
+        primaryEmail = view.findViewById(R.id.primaryEmail);
+        primaryPhoneNumber = view.findViewById(R.id.primaryPhoneNumber);
+        profileTranfers = view.findViewById(R.id.profileTranfers);
+        secondaryEmail  = view.findViewById(R.id.secondaryEmail);
+        secondaryPhoneNumber  = view.findViewById(R.id.secondaryPhoneNumber);
+        profileBedsNumber  = view.findViewById(R.id.profileBedsNumber);
+        profileServices  =  view.findViewById(R.id.profileServices);
+        profileDepartments = view.findViewById(R.id.profileDepartments);
 
-//        Log.e("====hshhss===" , Globall.selectedFacility.getFacilityCity());
+
 
         profileFacilityName.setText(Globall.selectedFacility.getDomain());
-        profileFacilityCity.setText(Globall.selectedFacility.getFacilityCity());
+        profileFacilityCity.setText(Globall.selectedFacility.getFacilityCity() + " , " + Globall.selectedFacility.getFacilityCountry());
+        primaryEmail.setText(Globall.contactGloball.getPrimaryEmail());
+        primaryPhoneNumber.setText(Globall.contactGloball.getPrimaryPhoneNumber());
+        profileTranfers.setText("Transfers ( " + Globall.transferList.size() + " ) ");
+        secondaryPhoneNumber.setText(Globall.contactGloball.getSecondaryPhoneNumber());
+        secondaryEmail.setText(Globall.contactGloball.getSecondaryEmail());
+        profileBedsNumber.setText( " Bed ( " + Globall.bedList.size() + " ) ");
+        profileServices.setText("Services ( " + Globall.serviceList.size() + " ) ");
+        profileDepartments.setText("Departments ( " + Globall.departmentList.size() + " ) ");
 
 
 
