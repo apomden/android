@@ -89,4 +89,12 @@ public class TransferRecyclerAdapter extends RecyclerView.Adapter<TransferRecycl
     public int getItemCount() {
         return transferList.size();
     }
+
+    public List<Transfer> getTransferList() {
+        return transferList;
+    }
+
+    public void setTransferList(List<Transfer> transferList) {
+        this.transferList = transferList;
+    }
 }

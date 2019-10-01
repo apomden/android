@@ -1,6 +1,7 @@
 package com.android.apomden.Fragments.Routers;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.Fragments.IncomingTransferFragment;
 import com.android.apomden.Fragments.OutgoingTransferFragment;
 import com.android.apomden.R;
+import com.android.apomden.Utilities.Globall;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -29,6 +31,9 @@ public class ProfileRouterFragment extends Fragment {
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_router, container, false);
 //        textView = view.findViewById(R.id.section_label);
+
+        Log.e("====Contact=====", Globall.contactGloball.getPrimaryEmail());
+
 
         ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);

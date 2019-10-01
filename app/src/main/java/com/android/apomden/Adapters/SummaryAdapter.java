@@ -89,4 +89,12 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.UserView
     public int getItemCount() {
         return userList.size();
     }
+
+    public List<Dashboard> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<Dashboard> userList) {
+        this.userList = userList;
+    }
 }

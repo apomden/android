@@ -50,7 +50,7 @@ public class DepartmentFragment extends Fragment {
         searchBed = view.findViewById(R.id.searchBed);
         recyclerView = view.findViewById(R.id.bedRecView);
 
-        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
+//        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
 
         mAdapter =  new DepartmentRecyclerAdapter(mList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

@@ -77,7 +77,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(List<Transfer> transfers) {
 
-                                        Log.e("==transfer==", String.valueOf(transfers.size()));
+//                                        Log.e("==transfer==", String.valueOf(transfers.size()));
                                         Globall.transferList = transfers;
 
                                         Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {

@@ -51,7 +51,7 @@ public class ServicesFragment extends Fragment {
         searchBed = view.findViewById(R.id.searchBed);
         recyclerView = view.findViewById(R.id.bedRecView);
 
-        Log.e("====Services=====", String.valueOf(mList.size()));
+//        Log.e("====Services=====", String.valueOf(mList.size()));
 
         mAdapter =  new ServiceRecyclerAdapter(mList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

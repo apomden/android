@@ -38,7 +38,7 @@ public class SingleDepartmentFragment extends Fragment {
 //        textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.bedRecView);
 
-        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
+//        Log.e("====Beds=====", String.valueOf(Globall.bedList.size()));
 
         mAdapter =  new BedRecyclerAdapter(Globall.bedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

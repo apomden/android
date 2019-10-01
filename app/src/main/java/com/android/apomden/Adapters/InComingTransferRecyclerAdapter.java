@@ -93,4 +93,12 @@ public class InComingTransferRecyclerAdapter extends RecyclerView.Adapter<InComi
     public int getItemCount() {
         return transferList.size();
     }
+
+    public List<Transfer> getTransferList() {
+        return transferList;
+    }
+
+    public void setTransferList(List<Transfer> transferList) {
+        this.transferList = transferList;
+    }
 }

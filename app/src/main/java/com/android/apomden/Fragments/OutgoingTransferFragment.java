@@ -58,7 +58,7 @@ public class OutgoingTransferFragment extends Fragment {
             public void onItemClick(int position) {
                 Toast.makeText(
                         getActivity(),
-                        outGoing.get(position).getName(),
+                        mAdapter.getTransferList().get(position).getName(),
                         Toast.LENGTH_SHORT).show();
             }
         });
