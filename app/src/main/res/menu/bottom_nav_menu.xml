@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_summary"
+        android:icon="@drawable/analysis"
+        android:title="Summary" />
+    <item
+        android:id="@+id/nav_beds"
+        android:icon="@drawable/patient"
+        android:title="Beds" />
+
+    <item
+        android:id="@+id/nav_transfer"
+        android:icon="@drawable/transfer"
+        android:title="Outgoing" />
+
+    <item
+        android:id="@+id/nav_transfers"
+        android:icon="@drawable/transs"
+        android:title="Incoming" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/userb"
+        android:title="Profile" />
+
+</menu>

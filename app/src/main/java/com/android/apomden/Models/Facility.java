@@ -15,6 +15,8 @@ public class Facility {
 
     private  Boolean verified;
 
+
+
     public Facility(String email, String facilityId, String password, String domain) {
         this.email = email;
         this.facilityId = facilityId;

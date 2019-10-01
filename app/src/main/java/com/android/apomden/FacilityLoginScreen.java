@@ -13,22 +13,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.apomden.Models.Department;
 import com.android.apomden.Models.Facility;
+import com.android.apomden.Models.Transfer;
+import com.android.apomden.Services.FacilityDetailsResponser;
 import com.android.apomden.Services.Responser;
+import com.android.apomden.Services.TransferDetailsResponser;
 import com.android.apomden.Utilities.Globall;
+
+import java.util.List;
 
 public class FacilityLoginScreen extends AppCompatActivity {
     Button enterMainScreen;
     EditText passwordText;
     TextView textTop, textBeforeBox;
     ProgressDialog pdialog;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Facility facility = Globall.selectedFacility;
+        pref   = getApplicationContext().getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
 
 
         enterMainScreen = findViewById(R.id.btnLoginToFacility);
@@ -37,8 +46,8 @@ public class FacilityLoginScreen extends AppCompatActivity {
         textBeforeBox   = findViewById(R.id.textBeforeBox);
         pdialog=new ProgressDialog(this);
 
-        textTop.setText(facility.getFacilityName());
-        textBeforeBox.setText(facility.getFacilityAddress());
+        textTop.setText(Globall.selectedFacility.getFacilityName());
+        textBeforeBox.setText(Globall.selectedFacility.getFacilityAddress());
 
 
         enterMainScreen.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +59,16 @@ public class FacilityLoginScreen extends AppCompatActivity {
                     pdialog.setIndeterminate(true);
                     pdialog.show();
 
-                    facility.setPassword(passwordText.getText().toString().trim());
+                    Globall.selectedFacility.setPassword(passwordText.getText().toString().trim());
 
-                    //TODO:: remove logic from here and put in an onclick
-                    Globall.logUserIn(facility, "user/login/", new Responser() {
+                    Globall.logUserIn(Globall.selectedFacility, "user/login/", new Responser() {
                         @Override
                         public void onSuccess(String string) {
                             Log.e("===Passed===", string);
+                            editor.putString("facName",  Globall.selectedFacility.getDomain());
+                            editor.putString("lollipop", Globall.selectedFacility.getPassword());
+                            editor.putString("facId",    Globall.selectedFacility.getFacilityId());
+                            editor.commit();
 
                             pdialog.dismiss();
 
@@ -65,9 +77,40 @@ public class FacilityLoginScreen extends AppCompatActivity {
                                     "Success",
                                     Toast.LENGTH_LONG).show();
 
-                            Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + facility.getDomain();
+                            Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
-                            startActivity(new Intent(getApplicationContext(), FacilityDashboardScreen.class));
+                            Globall.getFacilityDetails(Globall.selectedFacility.getFacilityId(), new FacilityDetailsResponser() {
+                                @Override
+                                public void onSuccess(List<Department> departments) {
+                                    Globall.departmentList = departments;
+
+                                    Globall.getFacilityTransfers(Globall.selectedFacility.getDomain(), new TransferDetailsResponser() {
+                                        @Override
+                                        public void onSuccess(List<Transfer> transfers) {
+                                            Globall.transferList = transfers;
+                                        }
+
+                                        @Override
+                                        public void onFailed(String string) {
+
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailed(String string) {
+
+                                }
+                            });
+
+
+
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Success",
+                                    Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
                         }
 
                         @Override
