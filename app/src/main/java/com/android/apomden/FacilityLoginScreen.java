@@ -68,12 +68,6 @@ public class FacilityLoginScreen extends AppCompatActivity {
                             editor.putString("lollipop", Globall.selectedFacility.getPassword());
                             editor.commit();
 
-                            pdialog.dismiss();
-
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Success",
-                                    Toast.LENGTH_LONG).show();
 
                             Globall.currentFacilityUrl = "https://www.apomden.com/facility/" + Globall.selectedFacility.getDomain();
 
@@ -87,11 +81,12 @@ public class FacilityLoginScreen extends AppCompatActivity {
                                         public void onSuccess(List<Department> departments) {
                                             Globall.departmentList = departments;
 
+                                            pdialog.dismiss();
 
                                             Toast.makeText(
                                                     getApplicationContext(),
                                                     "Success",
-                                                    Toast.LENGTH_SHORT).show();
+                                                    Toast.LENGTH_LONG).show();
 
                                             startActivity(new Intent(getApplicationContext(), MainDashboardScreen.class));
 
