@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:drawableTint="@color/colorPrimary"
+                android:hint="Service Name, e.g General Consultation"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawableStart="@drawable/transabat"
+                android:drawablePadding="10dp"
+                android:background="@drawable/rect_text_edit_white"
+                android:ems="10"
+                android:id="@+id/serviceNameText"
+                android:layout_alignParentEnd="true"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textImeMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableTint="@color/colorPrimary"
+                android:hint="Service Description"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawableStart="@drawable/pat"
+                android:drawablePadding="10dp"
+                android:background="@drawable/rect_text_edit_white"
+                android:ems="10"
+                android:id="@+id/serviceDescriptionText"
+                android:layout_alignParentEnd="true"
+                android:layout_alignRight="@+id/serviceNameText"
+                android:layout_alignEnd="@+id/serviceNameText"
+                android:layout_below="@+id/serviceNameText"
+                />
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Service"
+                android:id="@+id/btnAddService"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/custom_button"
+                android:textSize="20sp"
+                android:paddingTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="#ffffff"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/serviceDescriptionText"
+                android:layout_alignEnd="@+id/serviceDescriptionText"
+                android:layout_below="@+id/serviceDescriptionText"
+                />
+
+        </RelativeLayout>
+
+
+
+</RelativeLayout>
