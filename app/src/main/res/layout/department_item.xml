@@ -53,11 +53,11 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:id="@+id/imageView"
-                        android:src="@drawable/pat"/>
+                        android:src="@drawable/nom_pat"/>
                     <LinearLayout
                         android:paddingLeft="10dp"
                         android:layout_width="wrap_content"

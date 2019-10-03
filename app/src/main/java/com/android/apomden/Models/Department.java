@@ -42,4 +42,9 @@ public class Department {
     public void setRoomArrayList(List<Room> roomArrayList) {
         this.roomArrayList = roomArrayList;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

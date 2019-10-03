@@ -51,4 +51,9 @@ public class Room {
     public Department getDepartment() {
         return department;
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }
