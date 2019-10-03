@@ -7,6 +7,14 @@ public class Contact {
     private ArrayList<String> otherPhoneNumbers, otherEmails;
     private String id, primaryPhoneNumber, primaryEmail, secondaryPhoneNumber, secondaryEmail;
 
+    public Contact(String id, String primaryPhoneNumber, String primaryEmail, String secondaryPhoneNumber, String secondaryEmail) {
+        this.id = id;
+        this.primaryPhoneNumber = primaryPhoneNumber;
+        this.primaryEmail = primaryEmail;
+        this.secondaryPhoneNumber = secondaryPhoneNumber;
+        this.secondaryEmail = secondaryEmail;
+    }
+
     public Contact(ArrayList<String> otherPhoneNumbers, ArrayList<String> otherEmails, String id, String primaryPhoneNumber, String primaryEmail, String secondaryPhoneNumber, String secondaryEmail) {
         this.otherPhoneNumbers = otherPhoneNumbers;
         this.otherEmails = otherEmails;

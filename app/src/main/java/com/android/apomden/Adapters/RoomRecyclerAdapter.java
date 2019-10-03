@@ -1,6 +1,5 @@
 package com.android.apomden.Adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import com.android.apomden.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRecyclerAdapter.UserViewHolder> {
+public class RoomRecyclerAdapter extends RecyclerView.Adapter<RoomRecyclerAdapter.UserViewHolder> {
 
-    private List<Department> objectList;
+    private List<Room> objectList;
 
     private OnItemClickListener mListener;
 
@@ -50,14 +49,14 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
     }
 
 
-    public DepartmentRecyclerAdapter(List<Department> objectList){
+    public RoomRecyclerAdapter(List<Room> objectList){
         this.objectList = objectList;
 
     }
 
     @NonNull
     @Override
-    public DepartmentRecyclerAdapter.UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RoomRecyclerAdapter.UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View itemView = LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.department_item, parent, false);
 
@@ -65,27 +64,25 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DepartmentRecyclerAdapter.UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RoomRecyclerAdapter.UserViewHolder holder, int position) {
 
-        Department department = objectList.get(position);
-        holder.name.setText(department.getName());
+        Room department = objectList.get(position);
+        holder.name.setText(department.getId());
+        holder.gender.setText(department.getSex());
 
         // if no rooms check
-        if (!(department.getRoomArrayList().size() == 0)){
+        if (!(department.getBedArrayList().size() == 0)){
 
             List<String> result = prepareStatForDepartment(department);
             holder.stat.setText(result.get(0));
-
             // if no beds check
             holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
-            holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4) + " Uni: " + result.get(5));
+
 
         } else {
 
             holder.stat.setText("0");
             holder.available.setText("Occupied: 0");
-            holder.gender.setText("Male: 0  Female: 0 Uni: 0");
-
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -104,11 +101,11 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
     }
 
 
-    public List<Department> getObjectList() {
+    public List<Room> getObjectList() {
         return objectList;
     }
 
-    public void setBedList(List<Department> departmentList) {
+    public void setRoomList(List<Room> departmentList) {
         this.objectList = departmentList;
         notifyDataSetChanged();
     }
@@ -118,21 +115,19 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         return objectList.size();
     }
 
-    public void filterList (List<Department> filteredList){
+    public void filterList (List<Room> filteredList){
         this.objectList = filteredList;
         notifyDataSetChanged();
     }
 
-    private List<String> prepareStatForDepartment (Department department) {
+    private List<String> prepareStatForDepartment (Room roomList) {
 
         List<String> result = new ArrayList<>();
 
 
         String resultString = "";
 
-        List<Room> roomList = department.getRoomArrayList();
-        List<Bed> bedList = roomList.get(0).getBedArrayList();
-        List<Bed> deptBeds = new ArrayList<>();
+        List<Bed> deptBeds = roomList.getBedArrayList();
         List<Bed> occupiedBeds = new ArrayList<>();
         List<Bed> unoccupiedBeds = new ArrayList<>();
         List<Bed> girlsBed = new ArrayList<>();
@@ -140,11 +135,6 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         List<Bed> unisexBed = new ArrayList<>();
 
 
-        for (int i = 0; i < bedList.size(); i++) {
-            if (bedList.get(i).getRoomName().equalsIgnoreCase(department.getName())) {
-                deptBeds.add(bedList.get(i));
-            }
-        }
 
         // check for occupied
 

@@ -46,12 +46,12 @@ public class SummaryFragment extends Fragment {
 //        textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.recView);
 
-        Log.e("===Logger Dept===", String.valueOf(Globall.departmentList.size()));
-        Log.e("===Logger Transfer===", String.valueOf(Globall.transferList.size()));
-
-
-        Log.e("===Logger InComing===", String.valueOf(Globall.getIncomingTransfers(Globall.transferList).size()));
-        Log.e("===Logger OutGoing===", String.valueOf(Globall.getOutgoingTransfers(Globall.transferList).size()));
+//        Log.e("===Logger Dept===", String.valueOf(Globall.departmentList.size()));
+//        Log.e("===Logger Transfer===", String.valueOf(Globall.transferList.size()));
+//
+//
+//        Log.e("===Logger InComing===", String.valueOf(Globall.getIncomingTransfers(Globall.transferList).size()));
+//        Log.e("===Logger OutGoing===", String.valueOf(Globall.getOutgoingTransfers(Globall.transferList).size()));
 
 
         Dashboard dashboard =  new Dashboard(
@@ -97,7 +97,7 @@ public class SummaryFragment extends Fragment {
             public void onItemClick(int position) {
                 Toast.makeText(
                         getActivity(),
-                        Globall.dashboards.get(position).getTitle(),
+                        mAdapter.getUserList().get(position).getTitle(),
                         Toast.LENGTH_SHORT).show();
             }
         });

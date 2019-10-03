@@ -51,8 +51,7 @@ public class AllBedFragment extends Fragment {
         searchBed = view.findViewById(R.id.searchBed);
 
         bedList = Globall.bedList;
-        Log.e("====Beds=====", String.valueOf(bedList.size()));
-
+//        Log.e("====Beds=====", String.valueOf(bedList.size()));
 
         mAdapter =  new BedRecyclerAdapter(bedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

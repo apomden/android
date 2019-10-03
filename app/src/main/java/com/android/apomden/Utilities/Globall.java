@@ -53,7 +53,7 @@ public class Globall {
     public static List<Room> roomList = new ArrayList<>();
     public static List<Department> departmentList = new ArrayList<>();
     public static List<Bed> bedList = new ArrayList<>();
-    public static Contact contact = null;
+    public static Contact contactGloball = null;
     public static List<Transfer> transferList =  new ArrayList<>();
 
 
@@ -255,14 +255,25 @@ public class Globall {
 
         JSONObject jsonObject = new JSONObject(gottenString);
         JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
-        JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
-        JSONArray patientArrayObject =  new JSONArray(dataObject.getString("patients"));
-        JSONObject addressObject = new JSONObject(dataObject.getString("address"));
+//        JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
+//        JSONArray patientArrayObject =  new JSONArray(dataObject.getString("patients"));
+//        JSONObject addressObject = new JSONObject(dataObject.getString("address"));
         JSONObject contactObject = new JSONObject(dataObject.getString("contact"));
         JSONArray tagArrayObject =  new JSONArray(dataObject.getString("tags"));
         JSONArray departmentArrayObject =  new JSONArray(dataObject.getString("departments"));
         JSONArray servicesArrayObject = new JSONArray(dataObject.getString("services"));
-        JSONArray announcementArrayObject =  new JSONArray(dataObject.getString("announcements"));
+//        JSONArray announcementArrayObject =  new JSONArray(dataObject.getString("announcements"));
+
+
+        contactGloball = new Contact(
+            contactObject.getString("_id"),
+            contactObject.getString("primaryPhoneNumber"),
+            contactObject.getString("primaryEmail"),
+            contactObject.getString("secondaryPhoneNumber"),
+            contactObject.getString("secondaryEmail")
+        );
+
+
 
 
         // Deal With Tags

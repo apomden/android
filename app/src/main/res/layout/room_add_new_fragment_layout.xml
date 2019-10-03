@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:drawableTint="@color/colorPrimary"
+                android:hint="Add Room, e.g General Ward"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawableStart="@drawable/nom_trans"
+                android:drawablePadding="20dp"
+                android:background="@drawable/rect_text_edit_white"
+                android:ems="8"
+                android:id="@+id/serviceNameText"
+                android:layout_alignParentEnd="true"
+                />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:tooltipText="Select Department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/serviceNameText"
+                android:layout_below="@+id/serviceNameText"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableTint="@color/colorPrimary"
+                android:hint="Description"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawableStart="@drawable/nom_pat"
+                android:drawablePadding="20dp"
+                android:background="@drawable/rect_text_edit_white"
+                android:ems="8"
+                android:id="@+id/serviceDescriptionText"
+                android:layout_alignParentEnd="true"
+                android:layout_alignRight="@+id/spinner"
+                android:layout_alignEnd="@+id/spinner"
+                android:layout_below="@+id/spinner"
+                />
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Room"
+                android:id="@+id/btnAddService"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/custom_button"
+                android:textSize="20sp"
+                android:paddingTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="#ffffff"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/serviceDescriptionText"
+                android:layout_alignEnd="@+id/serviceDescriptionText"
+                android:layout_below="@+id/serviceDescriptionText"
+                />
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+</RelativeLayout>

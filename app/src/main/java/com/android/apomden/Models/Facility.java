@@ -15,7 +15,22 @@ public class Facility {
 
     private  Boolean verified;
 
+   public Facility () {
 
+    }
+
+    public Facility(String email, String facilityId, String domain, String facilityName, String facilityCountry, String facilityCity, String facilityRegion, String facilityStreet, String facilityDistrict, Boolean verified) {
+        this.email = email;
+        this.facilityId = facilityId;
+        this.domain = domain;
+        this.facilityName = facilityName;
+        this.facilityCountry = facilityCountry;
+        this.facilityCity = facilityCity;
+        this.facilityRegion = facilityRegion;
+        this.facilityStreet = facilityStreet;
+        this.facilityDistrict = facilityDistrict;
+        this.verified = verified;
+    }
 
     public Facility(String email, String facilityId, String password, String domain) {
         this.email = email;

@@ -1,6 +1,7 @@
 package com.android.apomden.Fragments.Routers;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,19 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.apomden.Adapters.BedRecyclerAdapter;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.Fragments.AllBedFragment;
-import com.android.apomden.Fragments.DepartmentAddNewFragment;
 import com.android.apomden.Fragments.DepartmentFragment;
-import com.android.apomden.Fragments.RoomAddNewFragment;
-import com.android.apomden.Fragments.RoomFragment;
+import com.android.apomden.Fragments.ServicesAddNewFragment;
+import com.android.apomden.Fragments.ServicesFragment;
 import com.android.apomden.R;
+import com.android.apomden.Utilities.Globall;
 import com.google.android.material.tabs.TabLayout;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class BedRouterFragment extends Fragment {
-   private ViewPager viewPager;
+public class ServicesRouterFragment extends Fragment {
+    private ViewPager viewPager;
 
 
 
@@ -34,12 +35,15 @@ public class BedRouterFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bed_router, container, false);
+        View view = inflater.inflate(R.layout.services_router, container, false);
 
 
         // Set Up Tab
         viewPager = view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
+        adapter.addFragment(new ServicesFragment(), "Services");
+        adapter.addFragment(new ServicesAddNewFragment(), "Add A Service");
+        viewPager.setAdapter(adapter);
 
         // Set Tabs inside Toolbar
         TabLayout tabs = view.findViewById(R.id.result_tabs);
@@ -50,21 +54,12 @@ public class BedRouterFragment extends Fragment {
     }
 
 
-    private void setupViewPager(ViewPager viewPager) {
 
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
-        adapter.addFragment(new DepartmentFragment(), "Departments");
-        adapter.addFragment(new RoomFragment(), "Rooms");
-        adapter.addFragment(new AllBedFragment(), "Beds");
-        adapter.addFragment(new DepartmentAddNewFragment(), "Add Department");
-        adapter.addFragment(new RoomAddNewFragment(), "Add Room");
-        adapter.addFragment(new DepartmentAddNewFragment(), "Add Bed");
-        viewPager.setAdapter(adapter);
-
-
+    public void setViewPager (int fragmentNumber) {
+        viewPager.setCurrentItem(fragmentNumber);
     }
 
-    public void setViewPager(int i) {
-        viewPager.setCurrentItem(i);
-    }
+
+
+
 }
