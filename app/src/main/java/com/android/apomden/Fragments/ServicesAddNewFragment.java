@@ -71,11 +71,11 @@ public class ServicesAddNewFragment extends Fragment {
     }
 
 
-    public boolean checkEmptyness (EditText editText) {
+    private boolean checkEmptyness (EditText editText) {
         return getEtVal(editText).isEmpty();
     }
 
-    public String getEtVal (EditText editText) {
+    private String getEtVal (EditText editText) {
         return editText.getText().toString().trim();
     }
 }

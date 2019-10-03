@@ -1,6 +1,7 @@
 package com.android.apomden.Fragments.Routers;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.android.apomden.Fragments.DepartmentFragment;
 import com.android.apomden.Fragments.ServicesAddNewFragment;
 import com.android.apomden.Fragments.ServicesFragment;
 import com.android.apomden.R;
+import com.android.apomden.Utilities.Globall;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -25,11 +27,7 @@ import com.google.android.material.tabs.TabLayout;
  * A placeholder fragment containing a simple view.
  */
 public class ServicesRouterFragment extends Fragment {
-    private TextView textView;
     private ViewPager viewPager;
-
-    private RecyclerView recyclerView;
-    private BedRecyclerAdapter mAdapter;
 
 
 
@@ -51,6 +49,23 @@ public class ServicesRouterFragment extends Fragment {
         TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                Log.e("+++PageScrolled++++", String.valueOf(position));
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e("+++PageSelected++++", String.valueOf(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+//                Log.e("PageChangeScllSChanged", String.valueOf(state));
+            }
+        });
+
 
         return view;
     }
@@ -60,6 +75,8 @@ public class ServicesRouterFragment extends Fragment {
     public void setViewPager (int fragmentNumber) {
         viewPager.setCurrentItem(fragmentNumber);
     }
+
+
 
 
 }

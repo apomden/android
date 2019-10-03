@@ -1,5 +1,6 @@
 package com.android.apomden.Fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -108,8 +109,8 @@ public class ServicesFragment extends Fragment {
 
     }
 
-    public void notifyChange () {
-        mAdapter.notifyDataSetChanged();
+    public void setList (List<Service> services) {
+        mAdapter.filterList(services);
     }
 
 }
