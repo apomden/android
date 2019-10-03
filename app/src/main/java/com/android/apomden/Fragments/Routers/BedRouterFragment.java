@@ -16,6 +16,8 @@ import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.Fragments.AllBedFragment;
 import com.android.apomden.Fragments.DepartmentAddNewFragment;
 import com.android.apomden.Fragments.DepartmentFragment;
+import com.android.apomden.Fragments.RoomAddNewFragment;
+import com.android.apomden.Fragments.RoomFragment;
 import com.android.apomden.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -51,9 +53,12 @@ public class BedRouterFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
-        adapter.addFragment(new DepartmentFragment(), "Rooms");
+        adapter.addFragment(new DepartmentFragment(), "Departments");
+        adapter.addFragment(new RoomFragment(), "Rooms");
         adapter.addFragment(new AllBedFragment(), "Beds");
-        adapter.addFragment(new DepartmentAddNewFragment(), "Add Room");
+        adapter.addFragment(new DepartmentAddNewFragment(), "Add Department");
+        adapter.addFragment(new RoomAddNewFragment(), "Add Room");
+        adapter.addFragment(new DepartmentAddNewFragment(), "Add Bed");
         viewPager.setAdapter(adapter);
 
 

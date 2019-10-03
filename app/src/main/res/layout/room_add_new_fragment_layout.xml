@@ -16,7 +16,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:drawableTint="@color/colorPrimary"
-                android:hint="Add Department, e.g ICU"
+                android:hint="Add Room, e.g General Ward"
                 android:padding="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -27,6 +27,14 @@
                 android:id="@+id/serviceNameText"
                 android:layout_alignParentEnd="true"
                 />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:tooltipText="Select Department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/serviceNameText"
+                android:layout_below="@+id/serviceNameText"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -45,9 +53,9 @@
                 android:ems="8"
                 android:id="@+id/serviceDescriptionText"
                 android:layout_alignParentEnd="true"
-                android:layout_alignRight="@+id/serviceNameText"
-                android:layout_alignEnd="@+id/serviceNameText"
-                android:layout_below="@+id/serviceNameText"
+                android:layout_alignRight="@+id/spinner"
+                android:layout_alignEnd="@+id/spinner"
+                android:layout_below="@+id/spinner"
                 />
 
 
@@ -55,7 +63,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Department"
+                android:text="Add Room"
                 android:id="@+id/btnAddService"
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@drawable/custom_button"
@@ -72,6 +80,10 @@
                 android:layout_alignEnd="@+id/serviceDescriptionText"
                 android:layout_below="@+id/serviceDescriptionText"
                 />
+
+
+
+
 
         </RelativeLayout>
 
