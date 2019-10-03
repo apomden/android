@@ -49,23 +49,6 @@ public class ServicesRouterFragment extends Fragment {
         TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                Log.e("+++PageScrolled++++", String.valueOf(position));
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Log.e("+++PageSelected++++", String.valueOf(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-//                Log.e("PageChangeScllSChanged", String.valueOf(state));
-            }
-        });
-
 
         return view;
     }
