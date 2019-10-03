@@ -98,7 +98,7 @@ public class DepartmentFragment extends Fragment {
         List<Department> filteredList = new ArrayList<>();
 
         for(Department deptItem: mList ) {
-            Boolean nameMatches = deptItem.getName().toLowerCase().contains(textString.toLowerCase());
+            boolean nameMatches = deptItem.getName().toLowerCase().contains(textString.toLowerCase());
 
             if (nameMatches){
                 filteredList.add(deptItem);

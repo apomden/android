@@ -67,13 +67,26 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
     @Override
     public void onBindViewHolder(@NonNull final DepartmentRecyclerAdapter.UserViewHolder holder, int position) {
 
-
         Department department = objectList.get(position);
-        List<String> result = prepareStatForDepartment(department);
         holder.name.setText(department.getName());
-        holder.stat.setText(result.get(0));
-        holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
-        holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4) + " Uni: " + result.get(5));
+
+        // if no rooms check
+        if (!(department.getRoomArrayList().size() == 0)){
+
+            List<String> result = prepareStatForDepartment(department);
+            holder.stat.setText(result.get(0));
+
+            // if no beds check
+            holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
+            holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4) + " Uni: " + result.get(5));
+
+        } else {
+
+            holder.stat.setText("0");
+            holder.available.setText("Occupied: 0");
+            holder.gender.setText("Male: 0  Female: 0 Uni: 0");
+
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +124,6 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
     }
 
     private List<String> prepareStatForDepartment (Department department) {
-
 
         List<String> result = new ArrayList<>();
 

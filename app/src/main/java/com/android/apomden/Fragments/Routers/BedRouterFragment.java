@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.apomden.Adapters.BedRecyclerAdapter;
 import com.android.apomden.Adapters.SectionsPagerAdapter;
 import com.android.apomden.Fragments.AllBedFragment;
+import com.android.apomden.Fragments.DepartmentAddNewFragment;
 import com.android.apomden.Fragments.DepartmentFragment;
 import com.android.apomden.R;
 import com.google.android.material.tabs.TabLayout;
@@ -23,10 +24,7 @@ import com.google.android.material.tabs.TabLayout;
  * A placeholder fragment containing a simple view.
  */
 public class BedRouterFragment extends Fragment {
-    TextView textView;
-
-    private RecyclerView recyclerView;
-    private BedRecyclerAdapter mAdapter;
+   private ViewPager viewPager;
 
 
 
@@ -38,7 +36,7 @@ public class BedRouterFragment extends Fragment {
 
 
         // Set Up Tab
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
@@ -55,8 +53,13 @@ public class BedRouterFragment extends Fragment {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
         adapter.addFragment(new DepartmentFragment(), "Rooms");
         adapter.addFragment(new AllBedFragment(), "Beds");
+        adapter.addFragment(new DepartmentAddNewFragment(), "Add Room");
         viewPager.setAdapter(adapter);
 
 
+    }
+
+    public void setViewPager(int i) {
+        viewPager.setCurrentItem(i);
     }
 }
