@@ -18,7 +18,7 @@
     <item
         android:id="@+id/nav_transfers"
         android:icon="@drawable/transs"
-        android:title="Incoming" />
+        android:title="Services" />
 
     <item
         android:id="@+id/nav_profile"

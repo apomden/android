@@ -52,7 +52,7 @@ public class FindYourFacilityScreen extends AppCompatActivity {
         if(pref.contains("email")){
 
             String emailUsedPreviously = pref.getString("email", "email");
-            Log.e("====nyenya===", pref.getString("lollipop", "lollipop"));
+//            Log.e("====nyenya===", pref.getString("lollipop", "lollipop"));
 
             if(pref.contains("lollipop")){
 //                editor.clear();
@@ -67,8 +67,9 @@ public class FindYourFacilityScreen extends AppCompatActivity {
                 String facilityStreet = pref.getString("facilityStreet", "facilityStreet");
                 String facilityDistrict = pref.getString("facilityDistrict", "facilityDistrict");
 
-                Log.e("====email===", facName);
-                Log.e("====Scolaris=====", pref.getString("facEmail", "facEmail"));
+//                Log.e("====email===", facName);
+//                Log.e("====Scolaris=====", pref.getString("facEmail", "facEmail"));
+
 
                 final Facility facility   = new Facility();
 
@@ -91,8 +92,8 @@ public class FindYourFacilityScreen extends AppCompatActivity {
 
                 Globall.selectedFacility = facility;
 
-                Log.e("====Name===", facName);
-                Log.e("====City=====", Globall.selectedFacility.getFacilityCity());
+//                Log.e("====Name===", facName);
+//                Log.e("====City=====", Globall.selectedFacility.getFacilityCity());
 
 
 

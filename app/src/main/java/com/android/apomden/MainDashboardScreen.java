@@ -1,5 +1,6 @@
 package com.android.apomden;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.android.apomden.Fragments.Routers.BedRouterFragment;
@@ -63,6 +64,10 @@ public class MainDashboardScreen extends AppCompatActivity {
         sectionsPagerAdapter.addFragment( new ProfileRouterFragment(), "Profile");
         viewPager.setAdapter(sectionsPagerAdapter);
 
+    }
+
+    public void setViewPager(int number){
+        viewPager.setCurrentItem(number);
     }
 
 }

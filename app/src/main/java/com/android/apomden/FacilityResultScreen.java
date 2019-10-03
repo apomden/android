@@ -64,7 +64,7 @@ public class FacilityResultScreen extends AppCompatActivity {
                 editor.putString("facilityDistrict", Globall.selectedFacility.getFacilityDistrict());
                 editor.commit();
 
-                Log.e("String", pref.getString("facEmail", "facEmail"));
+//                Log.e("String", pref.getString("facEmail", "facEmail"));
 
                 startActivity(new Intent(getApplicationContext(), FacilityLoginScreen.class));
 

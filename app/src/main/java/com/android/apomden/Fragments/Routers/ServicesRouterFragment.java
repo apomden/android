@@ -25,7 +25,8 @@ import com.google.android.material.tabs.TabLayout;
  * A placeholder fragment containing a simple view.
  */
 public class ServicesRouterFragment extends Fragment {
-    TextView textView;
+    private TextView textView;
+    private ViewPager viewPager;
 
     private RecyclerView recyclerView;
     private BedRecyclerAdapter mAdapter;
@@ -40,8 +41,11 @@ public class ServicesRouterFragment extends Fragment {
 
 
         // Set Up Tab
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        viewPager = view.findViewById(R.id.viewpager);
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
+        adapter.addFragment(new ServicesFragment(), "Services");
+        adapter.addFragment(new ServicesAddNewFragment(), "Add A Service");
+        viewPager.setAdapter(adapter);
 
         // Set Tabs inside Toolbar
         TabLayout tabs = view.findViewById(R.id.result_tabs);
@@ -52,13 +56,10 @@ public class ServicesRouterFragment extends Fragment {
     }
 
 
-    private void setupViewPager(ViewPager viewPager) {
 
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
-        adapter.addFragment(new ServicesFragment(), "Services");
-        adapter.addFragment(new ServicesAddNewFragment(), "Add A Service");
-        viewPager.setAdapter(adapter);
-
-
+    public void setViewPager (int fragmentNumber) {
+        viewPager.setCurrentItem(fragmentNumber);
     }
+
+
 }
