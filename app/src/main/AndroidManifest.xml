@@ -16,21 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainDashboardScreen"
+            android:name="com.pomden.apomden.MainDashboardScreen"
             android:label="@string/title_activity_main_dashboard_screen"></activity>
-        <activity android:name=".FindYourFacilityScreen">
+        <activity android:name="com.pomden.apomden.FindYourFacilityScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FacilityResultScreen" />
+        <activity android:name="com.pomden.apomden.FacilityResultScreen" />
         <activity
-            android:name=".FacilityDashboardScreen"
+            android:name="com.pomden.apomden.FacilityDashboardScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FacilityLoginScreen" />
+        <activity android:name="com.pomden.apomden.FacilityLoginScreen" />
     </application>
 
 </manifest>
