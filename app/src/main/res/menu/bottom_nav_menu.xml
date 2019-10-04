@@ -13,7 +13,7 @@
     <item
         android:id="@+id/nav_transfer"
         android:icon="@drawable/transfer"
-        android:title="Outgoing" />
+        android:title="Transfers" />
 
     <item
         android:id="@+id/nav_transfers"
