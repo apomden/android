@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.Adapters.BedRecyclerAdapter;
 import com.android.apomden.FindYourFacilityScreen;
+import com.android.apomden.Fragments.Routers.ProfileRouterFragment;
+import com.android.apomden.Fragments.Routers.ServicesRouterFragment;
+import com.android.apomden.MainDashboardScreen;
 import com.android.apomden.Models.Bed;
 import com.android.apomden.Models.Contact;
 import com.android.apomden.Models.Dashboard;
@@ -87,6 +90,8 @@ public class ProfileFragment extends Fragment {
         llProfileBeds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ((MainDashboardScreen)getActivity()).setViewPager(1);
                 Toast.makeText(view.getContext(), "profileBeds", Toast.LENGTH_SHORT ).show();
             }
         });
@@ -95,7 +100,8 @@ public class ProfileFragment extends Fragment {
         llProfileDept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "profileDept", Toast.LENGTH_SHORT ).show();
+                ((MainDashboardScreen)getActivity()).setViewPager(1);
+                Toast.makeText(view.getContext(), "Department", Toast.LENGTH_SHORT ).show();
             }
         });
 
@@ -104,7 +110,8 @@ public class ProfileFragment extends Fragment {
         llProfileTransfers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "profileTransfers", Toast.LENGTH_SHORT ).show();
+                ((MainDashboardScreen)getActivity()).setViewPager(2);
+                Toast.makeText(view.getContext(), "Transfers", Toast.LENGTH_SHORT ).show();
             }
         });
 
@@ -113,7 +120,8 @@ public class ProfileFragment extends Fragment {
         llProfileServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "profileServices", Toast.LENGTH_SHORT ).show();
+                ((MainDashboardScreen)getActivity()).setViewPager(3);
+                Toast.makeText(view.getContext(), "Services", Toast.LENGTH_SHORT ).show();
             }
         });
 
@@ -140,7 +148,7 @@ public class ProfileFragment extends Fragment {
                 Globall.transferList =  new ArrayList<>();
 
                 startActivity(new Intent(getActivity(), FindYourFacilityScreen.class));
-                Toast.makeText(view.getContext(), "Logging You Out", Toast.LENGTH_SHORT ).show();
+                Toast.makeText(view.getContext(), "Log Out Successful", Toast.LENGTH_SHORT ).show();
             }
         });
 

@@ -25,6 +25,8 @@ import com.google.android.material.tabs.TabLayout;
 public class ProfileRouterFragment extends Fragment {
 //    TextView textView;
 
+    ViewPager viewPager;
+
 
     @Override
     public View onCreateView(
@@ -36,7 +38,7 @@ public class ProfileRouterFragment extends Fragment {
         Log.e("====Contact=====", Globall.contactGloball.getPrimaryEmail());
 
 
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
@@ -55,5 +57,9 @@ public class ProfileRouterFragment extends Fragment {
         viewPager.setAdapter(adapter);
 
 
+    }
+
+    public void setViewPager(int i) {
+        viewPager.setCurrentItem(i);
     }
 }
