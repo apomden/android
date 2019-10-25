@@ -1,6 +1,7 @@
 package com.pomden.apomden.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ import com.pomden.apomden.Adapters.SummaryAdapter;
 import com.pomden.apomden.Models.Dashboard;
 import com.android.apomden.R;
 import com.pomden.apomden.Utilities.Globall;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PusherEvent;
+import com.pusher.client.channel.SubscriptionEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +33,7 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class SummaryFragment extends Fragment {
-    TextView textView;
 
-    private List<Dashboard> dashboards = new ArrayList<>();
     private RecyclerView recyclerView;
     private SummaryAdapter mAdapter;
 
@@ -39,16 +43,23 @@ public class SummaryFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.summary_fragment, container, false);
-//        textView = view.findViewById(R.id.section_label);
         recyclerView = view.findViewById(R.id.recView);
 
-//        Log.e("===Logger Dept===", String.valueOf(Globall.departmentList.size()));
-//        Log.e("===Logger Transfer===", String.valueOf(Globall.transferList.size()));
-//
-//
-//        Log.e("===Logger InComing===", String.valueOf(Globall.getIncomingTransfers(Globall.transferList).size()));
-//        Log.e("===Logger OutGoing===", String.valueOf(Globall.getOutgoingTransfers(Globall.transferList).size()));
+        PusherOptions options = new PusherOptions();
+        options.setCluster("eu");
+        Pusher pusher = new Pusher("c9f30615aa53f92bf6b4", options);
 
+        Channel channel = pusher.subscribe("pusherListener");
+        Log.e("=======Pusherrr=======", "iqygukywfuhvqwk");
+
+        channel.bind("koobiEvent", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(PusherEvent event) {
+                Log.e("=======Pusherrr=======", event.getData());
+            }
+        });
+
+        pusher.connect();
 
         Dashboard dashboard =  new Dashboard(
                 "Beds Available",
