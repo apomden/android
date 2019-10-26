@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.pomden.apomden.Adapters.BedRecyclerAdapter;
 import com.pomden.apomden.Adapters.SectionsPagerAdapter;
+import com.pomden.apomden.Fragments.FindFacilityFragment;
 import com.pomden.apomden.Fragments.IncomingTransferFragment;
 import com.pomden.apomden.Fragments.OutgoingTransferFragment;
 import com.android.apomden.R;
@@ -53,6 +54,7 @@ public class TransferRouterFragment extends Fragment {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getActivity(), getChildFragmentManager());
         adapter.addFragment(new IncomingTransferFragment(), "Incoming");
         adapter.addFragment(new OutgoingTransferFragment(), "Outgoing");
+        adapter.addFragment(new FindFacilityFragment(), "Find Facility");
         viewPager.setAdapter(adapter);
 
 
