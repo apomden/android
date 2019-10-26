@@ -3,6 +3,8 @@ package com.pomden.apomden.Fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pomden.apomden.Adapters.RoomRecyclerAdapter;
+import com.pomden.apomden.Fragments.Routers.BedRouterFragment;
+import com.pomden.apomden.MainDashboardScreen;
+import com.pomden.apomden.Models.Department;
 import com.pomden.apomden.Models.Room;
 import com.android.apomden.R;
 import com.pomden.apomden.Utilities.Globall;
@@ -28,7 +33,7 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class RoomFragment extends Fragment {
-
+    public static RoomFragment self;
     EditText searchBed;
     private RecyclerView recyclerView;
     private RoomRecyclerAdapter mAdapter;
@@ -40,12 +45,18 @@ public class RoomFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+        self = this;
         View view = inflater.inflate(R.layout.department_fragment, container, false);
 
         mList = Globall.roomList;
+
+
+        Log.e("Mlist Size", "Mlist size  " + mList.size() );
+
+
         searchBed = view.findViewById(R.id.searchBed);
         recyclerView = view.findViewById(R.id.bedRecView);
-
 
         mAdapter =  new RoomRecyclerAdapter(mList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -102,6 +113,36 @@ public class RoomFragment extends Fragment {
 
         mAdapter.filterList(filteredList);
 
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    public void setMlist(List<Room> room){
+        mAdapter.filterList(room);
+        mAdapter.notifyDataSetChanged();
     }
 
 }

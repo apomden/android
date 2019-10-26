@@ -44,30 +44,6 @@ public class SummaryFragment extends Fragment {
     private SummaryAdapter mAdapter;
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if(getView() == null){
-            return;
-        }
-
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    // handle back button's click listener
-                    Log.e("====Marlonnnn===", "onKey: I Have Been Pressed");
-
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
 
 
     @Override
@@ -174,4 +150,30 @@ public class SummaryFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    Log.e("====Marlonnnn===", "onKey: I Have Been Pressed");
+
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 }

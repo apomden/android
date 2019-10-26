@@ -56,6 +56,8 @@ public class Globall {
     public static int clickFromPosition = 0;
     public static int clickToPosition = 0;
     public static int specificClickedBy = 0;
+    public static List<Room> departmentClickRoomList = new ArrayList<>();
+    public static int sameSituationPosition = 0;
 
 
 

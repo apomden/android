@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 public class MainDashboardScreen extends AppCompatActivity {
     private ViewPager viewPager;
+    public static MainDashboardScreen self;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,6 +50,7 @@ public class MainDashboardScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        self =this;
         setContentView(R.layout.activity_main_dashboard_screen);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -64,8 +66,9 @@ public class MainDashboardScreen extends AppCompatActivity {
 
     }
 
-    public void setViewPager(int number){
+    public boolean setViewPager(int number){
         viewPager.setCurrentItem(number);
+        return true;
     }
 
 }

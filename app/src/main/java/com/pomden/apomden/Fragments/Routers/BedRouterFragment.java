@@ -23,6 +23,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Utilities.Globall;
 
+import java.util.ArrayList;
+
+import javax.security.auth.login.LoginException;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
@@ -31,11 +35,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class BedRouterFragment extends Fragment {
    private ViewPager viewPager;
+   public static BedRouterFragment self;
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        self = this;
         View view = inflater.inflate(R.layout.bed_router, container, false);
 
 
@@ -47,6 +53,35 @@ public class BedRouterFragment extends Fragment {
         TabLayout tabs = view.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
+        tabs.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    // Set Special Global Department Send Room Array Click Variable To Null
+                    Log.e("Department", "Department Has Been Selected Fresh" );
+                    RoomFragment.self.setMlist(Globall.roomList);
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 1) {
+                   RoomFragment.self.setMlist(Globall.roomList);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    RoomFragment.self.setMlist(Globall.roomList);
+                    Log.e("Department", "Department Has Been Reselected" );
+                }
+            }
+        });
 
         return view;
     }
@@ -87,8 +122,13 @@ public class BedRouterFragment extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
                     // handle back button's click listener
-                    Log.e("Bed Activity BackP=", "onKey: I Have Been Pressed");
-                    ((MainDashboardScreen)getActivity()).setViewPager(Globall.clickFromPosition);
+                    if (Globall.clickFromPosition == Globall.clickToPosition){
+                        BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
+
+                    } else {
+                        MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
+
+                    }
                     return true;
                 }
                 return false;
