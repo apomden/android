@@ -53,6 +53,8 @@ public class Globall {
     public static List<Bed> bedList = new ArrayList<>();
     public static Contact contactGloball = null;
     public static List<Transfer> transferList =  new ArrayList<>();
+    public static int clickFromPosition = 0;
+    public static int clickToPosition = 0;
 
 
 

@@ -2,6 +2,7 @@ package com.pomden.apomden.Fragments;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pomden.apomden.Adapters.SummaryAdapter;
+import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Models.Dashboard;
 import com.android.apomden.R;
 import com.pomden.apomden.Utilities.AppSecrets;
@@ -29,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -37,6 +41,32 @@ public class SummaryFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private SummaryAdapter mAdapter;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    Log.e("====Marlonnnn===", "onKey: I Have Been Pressed");
+
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 
     @Override
@@ -103,10 +133,37 @@ public class SummaryFragment extends Fragment {
         mAdapter.setOnItemClickListener(new SummaryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(
-                        getActivity(),
-                        mAdapter.getUserList().get(position).getTitle(),
-                        Toast.LENGTH_SHORT).show();
+                Globall.clickFromPosition = 0;
+
+                // navigate to fragment
+                switch(position){
+                    case 0:
+                        // code
+                        Globall.clickToPosition = 1;
+                        ((MainDashboardScreen)getActivity()).setViewPager(1);
+                        break;
+                    case 1:
+                        // move
+                        Globall.clickToPosition = 2;
+                        ((MainDashboardScreen)getActivity()).setViewPager(2);
+                        break;
+                    case 2:
+                        //  move
+                        Globall.clickToPosition = 2;
+                        ((MainDashboardScreen)getActivity()).setViewPager(2);
+                        break;
+                    case 3:
+                        // move
+                        Globall.clickToPosition = 2;
+                        ((MainDashboardScreen)getActivity()).setViewPager(3);
+                        break;
+                    default:
+                        // move
+                        Toast.makeText(getActivity(),
+                                mAdapter.getUserList().get(position).getTitle(),
+                                Toast.LENGTH_SHORT ).show();
+
+                }
             }
         });
 

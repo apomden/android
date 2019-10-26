@@ -2,6 +2,7 @@ package com.pomden.apomden.Fragments.Routers;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.pomden.apomden.Adapters.SectionsPagerAdapter;
 import com.pomden.apomden.Fragments.OutgoingTransferFragment;
 import com.pomden.apomden.Fragments.ProfileFragment;
 import com.android.apomden.R;
+import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Utilities.Globall;
 import com.google.android.material.tabs.TabLayout;
 
@@ -61,4 +63,30 @@ public class ProfileRouterFragment extends Fragment {
     public void setViewPager(int i) {
         viewPager.setCurrentItem(i);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    Log.e("Bed Activity BackP=", "onKey: I Have Been Pressed");
+                    ((MainDashboardScreen)getActivity()).setViewPager(Globall.clickFromPosition);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 }
