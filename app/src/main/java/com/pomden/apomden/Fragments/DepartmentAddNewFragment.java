@@ -1,6 +1,7 @@
 package com.pomden.apomden.Fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.pomden.apomden.Fragments.Routers.BedRouterFragment;
+import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Models.Department;
 import com.pomden.apomden.Models.Room;
 import com.android.apomden.R;
@@ -79,5 +81,46 @@ public class DepartmentAddNewFragment extends Fragment {
 
     private String getEtVal (EditText editText) {
         return editText.getText().toString().trim();
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    if (Globall.clickFromPosition == Globall.clickToPosition){
+                        BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+
+                    } else {
+                        MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

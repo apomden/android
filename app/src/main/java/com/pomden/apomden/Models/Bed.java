@@ -2,7 +2,7 @@ package com.pomden.apomden.Models;
 
 public class Bed {
     private Boolean isOccupied;
-    private String id, name, status, sex, roomName;
+    private String id, name, status, sex, roomName, deptId, deptName;
 
 
     public Bed(Boolean isOccupied, String id, String name, String status) {
@@ -70,4 +70,19 @@ public class Bed {
         this.roomName = roomName;
     }
 
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
 }

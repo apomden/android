@@ -66,7 +66,7 @@ public class RoomRecyclerAdapter extends RecyclerView.Adapter<RoomRecyclerAdapte
     public void onBindViewHolder(@NonNull final RoomRecyclerAdapter.UserViewHolder holder, int position) {
 
         Room department = objectList.get(position);
-        holder.name.setText(department.getId());
+        holder.name.setText(department.getName());
         holder.gender.setText(department.getSex());
 
         // if no rooms check

@@ -3,6 +3,7 @@ package com.pomden.apomden.Fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pomden.apomden.Adapters.BedRecyclerAdapter;
+import com.pomden.apomden.Fragments.Routers.BedRouterFragment;
+import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Models.Bed;
 import com.android.apomden.R;
+import com.pomden.apomden.Models.Room;
 import com.pomden.apomden.Utilities.Globall;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class AllBedFragment extends Fragment {
-
+    public static AllBedFragment self;
     EditText searchBed;
     private RecyclerView recyclerView;
     private BedRecyclerAdapter mAdapter;
@@ -41,7 +45,7 @@ public class AllBedFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bed_fragment, container, false);
-
+        self = this;
         // Set Up Recycler View
 
 
@@ -110,5 +114,53 @@ public class AllBedFragment extends Fragment {
         mAdapter.filterList(filteredList);
 
     }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    if (Globall.clickFromPosition == Globall.clickToPosition){
+                        BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+
+                    } else {
+                        MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+
+    public void setMlist(List<Bed> beds){
+        mAdapter.filterList(beds);
+        mAdapter.notifyDataSetChanged();
+    }
+
 
 }

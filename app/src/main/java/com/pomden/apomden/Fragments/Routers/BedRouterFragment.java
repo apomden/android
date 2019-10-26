@@ -125,9 +125,18 @@ public class BedRouterFragment extends Fragment {
                     if (Globall.clickFromPosition == Globall.clickToPosition){
                         BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
 
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+
                     } else {
                         MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
 
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
                     }
                     return true;
                 }

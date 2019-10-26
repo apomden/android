@@ -1,5 +1,6 @@
 package com.pomden.apomden.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
 
             // if no beds check
             holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
-            holder.gender.setText("Male: " + result.get(3) + " Female: " + result.get(4) + " Uni: " + result.get(5));
+            holder.gender.setText("Male: " + result.get(4) + " Female: " + result.get(3) + " Uni: " + result.get(5));
 
         } else {
 
@@ -127,10 +128,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         List<String> result = new ArrayList<>();
 
 
-        String resultString = "";
-
         List<Room> roomList = department.getRoomArrayList();
-        List<Bed> bedList = roomList.get(0).getBedArrayList();
         List<Bed> deptBeds = new ArrayList<>();
         List<Bed> occupiedBeds = new ArrayList<>();
         List<Bed> unoccupiedBeds = new ArrayList<>();
@@ -139,11 +137,12 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
         List<Bed> unisexBed = new ArrayList<>();
 
 
-        for (int i = 0; i < bedList.size(); i++) {
-            if (bedList.get(i).getRoomName().equalsIgnoreCase(department.getName())) {
-                deptBeds.add(bedList.get(i));
+        for (int i = 0; i < roomList.size(); i++) {
+            if (roomList.get(i).getDepartment().getId() == department.getId()){
+                deptBeds.addAll(roomList.get(i).getBedArrayList());
             }
         }
+
 
         // check for occupied
 
@@ -158,6 +157,7 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
 
         // male and female birds
         for (int i = 0; i < deptBeds.size(); i++) {
+
             if (deptBeds.get(i).getSex().equalsIgnoreCase("MALE")) {
                 boysBed.add(deptBeds.get(i));
             } else if (deptBeds.get(i).getSex().equalsIgnoreCase("FEMALE"))  {
@@ -167,9 +167,6 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
             }
         }
 
-//
-//        Log.e("==BOYS===", String.valueOf(boysBed.size()));
-//        Log.e("==GIRLS===", String.valueOf(girlsBed.size()));
 
         result.add(String.valueOf(deptBeds.size()));
         result.add(String.valueOf(occupiedBeds.size()));

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pomden.apomden.Adapters.DepartmentRecyclerAdapter;
 import com.pomden.apomden.Fragments.Routers.BedRouterFragment;
+import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Models.Department;
 import com.android.apomden.R;
 import com.pomden.apomden.Utilities.Globall;
@@ -111,6 +112,7 @@ public class DepartmentFragment extends Fragment {
     }
 
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -127,8 +129,22 @@ public class DepartmentFragment extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
                     // handle back button's click listener
-                    Log.e("====Marlonnnn===", "onKey: I Have Been Pressed");
+                    if (Globall.clickFromPosition == Globall.clickToPosition){
+                        BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
 
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+
+                    } else {
+                        MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+                    }
                     return true;
                 }
                 return false;

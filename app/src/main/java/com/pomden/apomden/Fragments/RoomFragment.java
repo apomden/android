@@ -69,10 +69,10 @@ public class RoomFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RoomRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(
-                        getActivity(),
-                        mAdapter.getObjectList().get(position).getId(),
-                        Toast.LENGTH_SHORT).show();
+
+                Room room = mAdapter.getObjectList().get(position);
+
+                Toast.makeText(getActivity(), room.getBedArrayList().size() + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -116,6 +116,7 @@ public class RoomFragment extends Fragment {
     }
 
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -132,7 +133,22 @@ public class RoomFragment extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
                     // handle back button's click listener
+                    if (Globall.clickFromPosition == Globall.clickToPosition){
+                        BedRouterFragment.self.setViewPager(Globall.sameSituationPosition);
 
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+
+                    } else {
+                        MainDashboardScreen.self.setViewPager(Globall.clickFromPosition);
+
+                        Globall.clickFromPosition =1;
+                        Globall.clickToPosition=1;
+                        Globall.specificClickedBy=0;
+                        Globall.sameSituationPosition=0;
+                    }
                     return true;
                 }
                 return false;
@@ -141,8 +157,15 @@ public class RoomFragment extends Fragment {
     }
 
     public void setMlist(List<Room> room){
-        mAdapter.filterList(room);
-        mAdapter.notifyDataSetChanged();
+
+        for (int i = 0; i < room.size() ; i++) {
+            Log.e("Ruler", room.get(i).getDepartment() + "");
+        }
+        mAdapter.setRoomList(room);
     }
+
+
+
+
 
 }

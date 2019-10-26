@@ -6,6 +6,7 @@ public class Room {
     private String sex, id;
     private List<Bed> bedArrayList;
     private Department department;
+    private String name;
 
 
     public Room(String sex, String id, List<Bed> bedArrayList) {
@@ -17,6 +18,22 @@ public class Room {
     public Room() {
 
     }
+
+    public Room(String sex, String id, List<Bed> bedArrayList, Department department, String name) {
+        this.sex = sex;
+        this.id = id;
+        this.bedArrayList = bedArrayList;
+        this.department = department;
+        this.name = name;
+    }
+
+    public Room(String sex, String id, List<Bed> bedArrayList, String name) {
+        this.sex = sex;
+        this.id = id;
+        this.bedArrayList = bedArrayList;
+        this.name = name;
+    }
+
 
     public String getSex() {
         return sex;
@@ -54,5 +71,13 @@ public class Room {
     @Override
     public String toString() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

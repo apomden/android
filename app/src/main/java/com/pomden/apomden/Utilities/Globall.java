@@ -1,5 +1,7 @@
 package com.pomden.apomden.Utilities;
 
+import android.util.Log;
+
 import com.pomden.apomden.Models.Bed;
 import com.pomden.apomden.Models.Contact;
 import com.pomden.apomden.Models.Dashboard;
@@ -259,14 +261,10 @@ public class Globall {
 
         JSONObject jsonObject = new JSONObject(gottenString);
         JSONObject dataObject = new JSONObject(jsonObject.getString("data"));
-//        JSONArray staffArrayObject = new JSONArray(dataObject.getString("staff"));
-//        JSONArray patientArrayObject =  new JSONArray(dataObject.getString("patients"));
-//        JSONObject addressObject = new JSONObject(dataObject.getString("address"));
         JSONObject contactObject = new JSONObject(dataObject.getString("contact"));
         JSONArray tagArrayObject =  new JSONArray(dataObject.getString("tags"));
         JSONArray departmentArrayObject =  new JSONArray(dataObject.getString("departments"));
         JSONArray servicesArrayObject = new JSONArray(dataObject.getString("services"));
-//        JSONArray announcementArrayObject =  new JSONArray(dataObject.getString("announcements"));
 
 
         contactGloball = new Contact(
@@ -314,15 +312,27 @@ public class Globall {
             JSONObject departmentEachObject = new JSONObject(departmentArrayObject.getString(i));
             String deptName  =  departmentEachObject.getString("name");
             JSONArray deptRoomsArray = new JSONArray(departmentEachObject.getString("rooms"));
+            String deptId  =  departmentEachObject.getString("_id");
+
+//            Log.e("Adomm", deptRoomsArray + "" );
+
+            List<Room> innerRoomList = new ArrayList<>();
 
             // Deal With Dep rooms
             for (int j = 0; j < deptRoomsArray.length(); j++) {
-
+                String roomName = new JSONObject( deptRoomsArray.getString(j) ).getString("name");
                 String roomSex = new JSONObject( deptRoomsArray.getString(j) ).getString("sex");
                 String roomId = new JSONObject( deptRoomsArray.getString(j) ).getString("_id");
 
                 JSONArray roomBedsArray = new JSONArray ( new JSONObject (deptRoomsArray.getString(j) ).getString("beds") );
 
+                Room room = new Room();
+                room.setId(roomId);
+                room.setSex(roomSex);
+                room.setName(roomName);
+                room.setDepartment(new Department(deptId, deptName));
+
+                List<Bed> roomBedList = new ArrayList<>();
 
                 // Deal With the Beads
                 for (int k = 0; k < roomBedsArray.length() ; k++) {
@@ -336,27 +346,26 @@ public class Globall {
                     bed.setOccupied( Boolean.valueOf(roomBedEachObject.getString("isOccupied")) );
                     bed.setStatus(roomBedEachObject.getString("status"));
                     bed.setSex(roomSex);
-                    bed.setRoomName(deptName);
+                    bed.setDeptName(deptName);
+                    bed.setDeptId(deptId);
+                    bed.setRoomName(roomName);
+                    roomBedList.add(bed);
                     bedList.add(bed);
 
                 }
                 //
 
-                Room room = new Room(
-                        roomSex,
-                        roomId,
-                        bedList
-                );
-
+                room.setBedArrayList(roomBedList);
+                innerRoomList.add(room);
                 roomList.add(room);
-
 
             }
 
+
             Department department =  new Department(
-                    departmentEachObject.getString("_id"),
+                    deptId,
                     deptName,
-                    roomList
+                    innerRoomList
             );
 
             returnDepartments.add(department);
