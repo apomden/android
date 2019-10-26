@@ -70,7 +70,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return id;
+        return name;
     }
 
     public String getName() {

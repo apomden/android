@@ -19,6 +19,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="top_text_find">In Apomden, everything happens in a facility portal. A facility portal is where your facility\'s workers check and/or update bed information and could also initiate patient transfers.</string>
     <string name="start_with_a_facility">Start With A Facility</string>
-    <string name="hint_email">eg. kwabyna.gyamfi@gmail.com</string>
+    <string name="hint_email">eg. kwabyna@gmail.com</string>
 
 </resources>

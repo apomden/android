@@ -75,13 +75,13 @@ public class RoomRecyclerAdapter extends RecyclerView.Adapter<RoomRecyclerAdapte
             List<String> result = prepareStatForDepartment(department);
             holder.stat.setText(result.get(0));
             // if no beds check
-            holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
+            holder.available.setText("Occ: " + result.get(1) + " Av: " + result.get(2));
 
 
         } else {
 
             holder.stat.setText("0");
-            holder.available.setText("Occupied: 0");
+            holder.available.setText("Occ: 0");
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

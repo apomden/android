@@ -77,8 +77,8 @@ public class DepartmentRecyclerAdapter extends RecyclerView.Adapter<DepartmentRe
             holder.stat.setText(result.get(0));
 
             // if no beds check
-            holder.available.setText("Occupied: " + result.get(1) + " Available: " + result.get(2));
-            holder.gender.setText("Male: " + result.get(4) + " Female: " + result.get(3) + " Uni: " + result.get(5));
+            holder.available.setText("Occ: " + result.get(1) + " Av: " + result.get(2));
+            holder.gender.setText("M: " + result.get(4) + " F: " + result.get(3) + " U: " + result.get(5));
 
         } else {
 
