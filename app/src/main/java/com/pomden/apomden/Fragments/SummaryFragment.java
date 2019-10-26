@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pomden.apomden.Adapters.SummaryAdapter;
 import com.pomden.apomden.Models.Dashboard;
 import com.android.apomden.R;
+import com.pomden.apomden.Utilities.AppSecrets;
 import com.pomden.apomden.Utilities.Globall;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
@@ -47,14 +48,14 @@ public class SummaryFragment extends Fragment {
 
         PusherOptions options = new PusherOptions();
         options.setCluster("eu");
-        Pusher pusher = new Pusher("c9f30615aa53f92bf6b4", options);
+        Pusher pusher = new Pusher(AppSecrets.PUSHER_API_KEY, options);
 
-        Channel channel = pusher.subscribe("pusherListener");
-        Log.e("=======Pusherrr=======", "iqygukywfuhvqwk");
+        Channel channel = pusher.subscribe(AppSecrets.PUSHER_CHANNEL_NAME);
 
-        channel.bind("koobiEvent", new SubscriptionEventListener() {
+        channel.bind(AppSecrets.PUSHER_EVENT_NAME, new SubscriptionEventListener() {
             @Override
             public void onEvent(PusherEvent event) {
+                // do some work with the data
                 Log.e("=======Pusherrr=======", event.getData());
             }
         });
