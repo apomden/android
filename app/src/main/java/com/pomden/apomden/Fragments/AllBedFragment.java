@@ -157,10 +157,10 @@ public class AllBedFragment extends Fragment {
     }
 
 
-    public void setMlist(List<Bed> beds){
-        mAdapter.filterList(beds);
-        mAdapter.notifyDataSetChanged();
+    public void setMlist(List<Bed> bed){
+        mAdapter.setBedList(bed);
     }
+
 
 
 }

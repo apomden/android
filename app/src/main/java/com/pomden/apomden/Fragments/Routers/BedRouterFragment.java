@@ -63,6 +63,12 @@ public class BedRouterFragment extends Fragment {
                     RoomFragment.self.setMlist(Globall.roomList);
                 }
 
+                if (position == 1) {
+                    // Set Special Global Department Send Room Array Click Variable To Null
+                    Log.e("Department", "Department Has Been Selected Fresh" );
+                    AllBedFragment.self.setMlist(Globall.bedList);
+                }
+
             }
 
             @Override
@@ -70,6 +76,10 @@ public class BedRouterFragment extends Fragment {
                 int position = tab.getPosition();
                 if (position == 1) {
                    RoomFragment.self.setMlist(Globall.roomList);
+                }
+
+                if (position == 2) {
+                    AllBedFragment.self.setMlist(Globall.bedList);
                 }
             }
 
@@ -79,6 +89,9 @@ public class BedRouterFragment extends Fragment {
                 if (position == 0) {
                     RoomFragment.self.setMlist(Globall.roomList);
                     Log.e("Department", "Department Has Been Reselected" );
+                }
+                if (position == 2) {
+                    AllBedFragment.self.setMlist(Globall.bedList);
                 }
             }
         });

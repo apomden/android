@@ -71,8 +71,12 @@ public class RoomFragment extends Fragment {
             public void onItemClick(int position) {
 
                 Room room = mAdapter.getObjectList().get(position);
-
-                Toast.makeText(getActivity(), room.getBedArrayList().size() + "", Toast.LENGTH_SHORT).show();
+                AllBedFragment.self.setMlist(room.getBedArrayList());
+                BedRouterFragment.self.setViewPager(2);
+                Globall.clickToPosition=1;
+                Globall.clickFromPosition=1;
+                Globall.sameSituationPosition=1;
+//                Toast.makeText(getActivity(), room.getBedArrayList().size() + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -157,10 +161,6 @@ public class RoomFragment extends Fragment {
     }
 
     public void setMlist(List<Room> room){
-
-        for (int i = 0; i < room.size() ; i++) {
-            Log.e("Ruler", room.get(i).getDepartment() + "");
-        }
         mAdapter.setRoomList(room);
     }
 
