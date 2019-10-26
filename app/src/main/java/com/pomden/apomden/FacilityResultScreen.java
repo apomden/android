@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.pomden.apomden.Adapters.FacilityAdapter;
 import com.android.apomden.R;
+import com.pomden.apomden.Adapters.FacilityAdapter2;
 import com.pomden.apomden.Utilities.Globall;
 
 public class FacilityResultScreen extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class FacilityResultScreen extends AppCompatActivity {
         editor = pref.edit();
 
 
-        FacilityAdapter facilityAdapter = new FacilityAdapter(this, 0, Globall.globallFacilities);
+        FacilityAdapter2 facilityAdapter = new FacilityAdapter2(this, 0, Globall.globallFacilities);
         listView.setAdapter(facilityAdapter);
 
 

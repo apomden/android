@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.apomden.R;
+import com.pomden.apomden.Adapters.FacilityAdapter2;
 import com.pomden.apomden.Adapters.TransferRecyclerAdapter;
 import com.pomden.apomden.Models.Transfer;
 import com.pomden.apomden.Utilities.Globall;
@@ -25,18 +27,20 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class FindFacilityFragment extends Fragment {
-    TextView textView;
 
-    private RecyclerView recyclerView;
-    private TransferRecyclerAdapter mAdapter;
 
+    ListView listView;
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.department_fragment, container, false);
-//        textView = view.findViewById(R.id.section_label);
+        View view = inflater.inflate(R.layout.activity_facility_result_screen, container, false);
+
+        listView = view.findViewById(R.id.facilitiesList);
+
+        FacilityAdapter2 facilityAdapter = new FacilityAdapter2(getActivity(), 0, Globall.globallGotten);
+        listView.setAdapter(facilityAdapter);
 
 
         return view;

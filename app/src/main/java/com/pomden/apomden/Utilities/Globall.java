@@ -45,6 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Globall {
 
     public static List<Facility> globallFacilities = new ArrayList<>();
+    public static List<Facility> globallGotten = new ArrayList<>();
     public static Facility selectedFacility = null;
     public static String currentFacilityUrl = null;
     public static List<Dashboard> dashboards = new ArrayList<>();
@@ -199,6 +200,8 @@ public class Globall {
                             user.setFacilityName(facilityName);
 
                             facilities.add(user);
+
+                            globallGotten.add(user);
                         }
 
 
@@ -338,7 +341,7 @@ public class Globall {
                 for (int k = 0; k < roomBedsArray.length() ; k++) {
                     JSONObject roomBedEachObject = new JSONObject(roomBedsArray.getString(i));
                     /*
-                    {@name,tags, isOccupied, status, lastUsedBy}
+                    {@name, tags, isOccupied, status, lastUsedBy}
                     * */
                     Bed bed = new Bed();
                     bed.setId(roomBedEachObject.getString("_id"));
@@ -370,6 +373,7 @@ public class Globall {
 
             returnDepartments.add(department);
         }
+
 
         return returnDepartments;
 
