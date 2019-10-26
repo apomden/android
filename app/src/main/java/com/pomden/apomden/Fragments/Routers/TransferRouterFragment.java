@@ -27,7 +27,7 @@ import com.pomden.apomden.Utilities.Globall;
  * A placeholder fragment containing a simple view.
  */
 public class TransferRouterFragment extends Fragment {
-
+    private ViewPager viewPager;
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -36,7 +36,7 @@ public class TransferRouterFragment extends Fragment {
 
 
         // Set Up Tab
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
@@ -58,9 +58,17 @@ public class TransferRouterFragment extends Fragment {
 
     }
 
+    public void setViewPager(int number){
+        viewPager.setCurrentItem(number);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+        if (Globall.clickFromPosition == 0 && Globall.specificClickedBy == 2){
+            setViewPager(1);
+        }
 
         if(getView() == null){
             return;

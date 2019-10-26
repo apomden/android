@@ -55,6 +55,8 @@ public class Globall {
     public static List<Transfer> transferList =  new ArrayList<>();
     public static int clickFromPosition = 0;
     public static int clickToPosition = 0;
+    public static int specificClickedBy = 0;
+
 
 
 

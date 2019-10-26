@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pomden.apomden.Adapters.SummaryAdapter;
+import com.pomden.apomden.Fragments.Routers.TransferRouterFragment;
 import com.pomden.apomden.MainDashboardScreen;
 import com.pomden.apomden.Models.Dashboard;
 import com.android.apomden.R;
@@ -140,21 +141,25 @@ public class SummaryFragment extends Fragment {
                     case 0:
                         // code
                         Globall.clickToPosition = 1;
+                        Globall.specificClickedBy = position;
                         ((MainDashboardScreen)getActivity()).setViewPager(1);
                         break;
                     case 1:
                         // move
                         Globall.clickToPosition = 2;
+                        Globall.specificClickedBy = position;
                         ((MainDashboardScreen)getActivity()).setViewPager(2);
                         break;
                     case 2:
                         //  move
                         Globall.clickToPosition = 2;
+                        Globall.specificClickedBy = position;
                         ((MainDashboardScreen)getActivity()).setViewPager(2);
                         break;
                     case 3:
                         // move
                         Globall.clickToPosition = 2;
+                        Globall.specificClickedBy = position;
                         ((MainDashboardScreen)getActivity()).setViewPager(3);
                         break;
                     default:
